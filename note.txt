@@ -1,0 +1,3 @@
+public access:
+username = public
+password = mabarvip

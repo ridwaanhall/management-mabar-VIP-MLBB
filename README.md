@@ -2,13 +2,13 @@
 
 ## Overview
 
-Project ini dibuat untuk memudahkan streamer perintis agar mudah untuk mendata dan memanage siapa saja yang ikut mabar, request hero, dan request skin.
+Project ini dibuat untuk memudahkan streamer perintis untuk mendata dan memanage siapa saja yang ikut mabar, request hero, dan request skin.
 
 ## Features
 
 - soon
 
-## How to use
+## Preparation
 
 1. Clone this repository
 
@@ -45,6 +45,62 @@ Project ini dibuat untuk memudahkan streamer perintis agar mudah untuk mendata d
 
     ```bash
     http://127.0.0.1:8000/
+    ```
+
+## How to use
+
+### Admin
+
+1. Login as admin
+
+    ```bash
+    http://127.0.0.1:8000/admin/
+    ```
+
+2. Add Mabar
+
+    ```bash
+    http://127.0.0.1:8000/admin/mabar/mabar/add/
+    ```
+
+3. Add Request Hero
+
+    ```bash
+    http://127.0.0.1:8000/admin/mabar/requesthero/add/
+    ```
+
+4. Add Bonus Skin
+
+    ```bash
+    http://127.0.0.1:8000/admin/mabar/bonusskin/add/
+    ```
+
+### Public
+
+Visit this website url:
+
+- for mabar list
+
+    Mengecek Status Mabar
+
+    ```bash
+    http://127.0.0.1:8000/public/list-mabar/
+    ```
+
+- for request hero list
+
+    Mengecek Request Hero
+
+    ```bash
+    http://127.0.0.1:8000/public/list-req-hero/
+    ```
+
+- for bonus skin list
+
+    Mengecek Bonus Skin
+
+    ```bash
+    http://127.0.0.1:8000/public/list-free-skin/
     ```
 
 ## License

@@ -80,17 +80,17 @@ class MabarAdmin(admin.ModelAdmin):
 
     # Actions
     def mark_as_salah_id(self, request, queryset):
-        updated = queryset.update(status='salah_id', catatan='Pastikan ID kamu sudah benar!', is_done=False)
+        updated = queryset.update(status='salah_id', catatan='Kirim ulang ID-mu!', is_done=False)
         self.message_user(request, f'{updated} mabar record(s) marked as Salah ID User.')
     mark_as_salah_id.short_description = 'Mark selected records as Salah ID User'
 
     def mark_as_kurang(self, request, queryset):
-        updated = queryset.update(status='kurang', catatan='Whoopp! Dana Mabarmu kurang nih!', is_done=False)
+        updated = queryset.update(status='kurang', catatan='Whoopp! Danamu kurang!', is_done=False)
         self.message_user(request, f'{updated} mabar record(s) marked as Donasi Kurang.')
     mark_as_kurang.short_description = 'Mark selected records as Donasi Kurang'
 
     def mark_as_prepare(self, request, queryset):
-        updated = queryset.update(status='prepare', catatan='Harap untuk login dan bersiap untuk mabar!', is_done=False)
+        updated = queryset.update(status='prepare', catatan='Login dan bersiap!', is_done=False)
         self.message_user(request, f'{updated} mabar record(s) marked as Persiapan.')
     mark_as_prepare.short_description = 'Mark selected records as Persiapan'
     
@@ -107,7 +107,7 @@ class MabarAdmin(admin.ModelAdmin):
                 obj.is_done = True  # Mark as done if 'telah_digunakan' equals or exceeds 'jumlah_game'
             else:
                 obj.status = 'in_mabar'
-                obj.catatan=f'Telah digunakan {obj.telah_digunakan} dari {obj.jumlah_game} game'
+                obj.catatan=f'Telah digunakan {obj.telah_digunakan} dari {obj.jumlah_game} game!'
                 obj.is_done = False
 
             obj.save()  # Save the updated object

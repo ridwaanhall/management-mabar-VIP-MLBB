@@ -1,0 +1,68 @@
+{% extends 'public/base.html' %}
+
+{% block title %}Daftar Request Hero{% endblock %}
+
+{% block content %}
+<h1 class="text-center mb-4">Daftar Request Hero</h1>
+
+<div class="table-responsive">
+    <table class="table table-bordered table-striped">
+        <thead class="table-dark">
+            <tr>
+                <th scope="col">Tanggal Dibuat</th>
+                <th scope="col">Pendonasi</th>
+                <th scope="col">Type Request</th>
+                <th scope="col">Hero</th>
+                <th scope="col">Type Lane</th>
+                <th scope="col">Jumlah Request</th>
+                <th scope="col">Sudah Selesai</th>
+                <th scope="col">Catatan</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for request in requests %}
+            <tr>
+                <td>{{ request.date_created }}</td>
+                <td>{{ request.donate_name }}</td>
+                <td>
+                    {% if request.type_request == 'meta' %}
+                        <span class="badge bg-primary">Meta</span>
+                    {% elif request.type_request == 'non_meta' %}
+                        <span class="badge bg-secondary">Non-Meta</span>
+                    {% elif request.type_request == 'troll' %}
+                        <span class="badge bg-warning">Troll</span>
+                    {% elif request.type_request == 'lain' %}
+                        <span class="badge bg-info">Lain-lain</span>
+                    {% endif %}
+                </td>
+                <td>{{ request.hero_name }}</td>
+                <td>
+                    {% if request.type_lane == 'roam' %}
+                        <span class="badge bg-primary">Roam</span>
+                    {% elif request.type_lane == 'gold' %}
+                        <span class="badge bg-secondary">Gold</span>
+                    {% elif request.type_lane == 'jungle' %}
+                        <span class="badge bg-warning">Jungle</span>
+                    {% elif request.type_lane == 'mid' %}
+                        <span class="badge bg-info">Mid</span>
+                    {% elif request.type_lane == 'exp' %}
+                        <span class="badge bg-danger">EXP</span>
+                    {% elif request.type_lane == 'bebas' %}
+                        <span class="badge bg-success">Bebas</span>
+                    {% endif %}
+                </td>
+                <td>{{ request.count }}</td>
+                <td>
+                    {% if request.is_done %}
+                        <i class="ti ti-circle-check-filled text-success"></i>
+                    {% else %}
+                        <i class="ti ti-xbox-x-filled text-danger"></i>
+                    {% endif %}
+                </td>
+                <td>{{ request.catatan }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

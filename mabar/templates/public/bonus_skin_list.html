@@ -1,0 +1,40 @@
+{% extends 'public/base.html' %}
+
+{% block title %}Daftar Bonus Skin{% endblock %}
+
+{% block content %}
+<h1 class="text-center mb-4">Daftar Bonus Skin</h1>
+
+<div class="table-responsive">
+    <table class="table table-bordered table-striped">
+        <thead class="table-dark">
+            <tr>
+                <th scope="col">Tanggal Dibuat</th>
+                <th scope="col">User</th>
+                <th scope="col">Hero Digunakan</th>
+                <th scope="col">Skin Request</th>
+                <th scope="col">Terkirim</th>
+                <th scope="col">Terkirim Pada</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for skin in skins %}
+            <tr>
+                <td>{{ skin.date_created }}</td>
+                <td>{{ skin.mabar }}</td>
+                <td>{{ skin.hero_digunakan }}</td>
+                <td>{{ skin.skin_request }}</td>
+                <td>
+                    {% if skin.terkirim %}
+                        <i class="ti ti-circle-check-filled text-success"></i>
+                    {% else %}
+                        <i class="ti ti-xbox-x-filled text-danger"></i>
+                    {% endif %}
+                </td>                
+                <td>{{ skin.date_terkirim }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

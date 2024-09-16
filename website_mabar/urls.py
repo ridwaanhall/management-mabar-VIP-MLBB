@@ -1,8 +1,8 @@
 from django.contrib import admin
-from django.urls import path
-from .views import redirect_to_mabar_admin
+from django.shortcuts import redirect
+from django.urls import path, include
 
 urlpatterns = [
-    path('', redirect_to_mabar_admin),
     path('admin/', admin.site.urls),
+    path('', lambda request: redirect('admin/mabar/mabar/')),
 ]

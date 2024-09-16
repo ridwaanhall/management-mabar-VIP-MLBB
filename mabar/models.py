@@ -16,6 +16,7 @@ class Mabar(models.Model):
         verbose_name="Pendonasi"
     )
     nickname = models.CharField(
+        default="-",
         max_length=100, 
         blank=True, 
         null=True, 
@@ -25,6 +26,7 @@ class Mabar(models.Model):
         verbose_name="ID"
     )
     zone_user = models.IntegerField(
+        default=0,
         blank=True, 
         null=True, 
         verbose_name="Zone"

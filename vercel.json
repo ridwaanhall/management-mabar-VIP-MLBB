@@ -1,12 +1,13 @@
 {
-    "builds": [
-      {
-        "src": "manage.py",
-        "use": "@vercel/python"
-      }
-    ],
+    "builds": [{
+      "src": "website_mabar/wsgi.py",
+      "use": "@vercel/python",
+      "config": { "maxLambdaSize": "15mb", "runtime": "python3.12.0" }
+    }],
     "routes": [
-      { "src": "/(.*)", "dest": "manage.py" }
+      {
+        "src": "/(.*)",
+        "dest": "website_mabar/wsgi.py"
+      }
     ]
-  }
-  
+}

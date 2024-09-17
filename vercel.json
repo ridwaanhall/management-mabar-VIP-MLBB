@@ -1,0 +1,8 @@
+{
+    "routes": [
+        {
+            "src": "/(.*)",
+            "dest": "website_mabar/wsgi.py"
+        }
+    ]
+}

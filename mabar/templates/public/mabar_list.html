@@ -5,6 +5,7 @@
 {% block content %}
 <h1 class="text-center mb-4">Daftar Mabar</h1>
 
+<!-- prepare records table -->
 <div class="table-responsive mb-2">
     <table class="table table-bordered table-striped">
         <thead class="table-dark">
@@ -69,6 +70,74 @@
         </tbody>
     </table>
 </div>
+<!-- prepare records table end -->
+
+<!-- records except done -->
+<div class="table-responsive">
+    <table class="table table-bordered table-striped">
+        <thead class="table-dark">
+            <tr>
+                <th scope="col">Tanggal Dibuat</th>
+                <th scope="col">Pendonasi</th>
+                <th scope="col">Jumlah</th>
+                <th scope="col">Used</th>
+                <th scope="col">Nickname</th>
+                <th scope="col">ID</th>
+                <th scope="col">Zone</th>
+                <th scope="col">Status</th>
+                <th scope="col">Catatan</th>
+                <th scope="col">VVIP</th>
+                <th scope="col">Done</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for record in records_except_done %}
+            <tr>
+                <td>{{ record.date_created }}</td>
+                <td>{{ record.donate_name }}</td>
+                <td>{{ record.jumlah_game }}</td>
+                <td>{{ record.telah_digunakan }}</td>
+                <td>{{ record.nickname }}</td>
+                <td>{{ record.id_user }}</td>
+                <td>{{ record.zone_user }}</td>
+                <td>
+                    {% if record.status == 'done' %}
+                        <span class="badge" style="background-color: green; color: white;">Selesai</span>
+                    {% elif record.status == 'antri' %}
+                        <span class="badge" style="background-color: orange; color: white;">Dalam Antrian</span>
+                    {% elif record.status == 'prepare' %}
+                        <span class="badge" style="background-color: blue; color: white;">Persiapan</span>
+                    {% elif record.status == 'in_mabar' %}
+                        <span class="badge" style="background-color: lightgreen; color: black;">Sedang Mabar</span>
+                    {% elif record.status == 'salah_id' %}
+                        <span class="badge" style="background-color: red; color: white;">Salah ID User</span>
+                    {% elif record.status == 'kurang' %}
+                        <span class="badge" style="background-color: red; color: white;">Donasi Kurang</span>
+                    {% else %}
+                        <span class="badge" style="background-color: grey; color: white;">{{ record.status }}</span>
+                    {% endif %}
+                </td>
+                <td>{{ record.catatan }}</td>
+                <td>
+                    {% if record.is_vvip %}
+                        <i class="ti ti-circle-check-filled text-primary"></i>
+                    {% else %}
+                        <i class="ti ti-xbox-x-filled text-secondary"></i>
+                    {% endif %}
+                </td>
+                <td>
+                    {% if record.is_done %}
+                        <i class="ti ti-circle-check-filled text-success"></i>
+                    {% else %}
+                        <i class="ti ti-xbox-x-filled text-danger"></i>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<!-- records except done end -->
 
 <div class="table-responsive">
     <table class="table table-bordered table-striped">
@@ -88,7 +157,7 @@
             </tr>
         </thead>
         <tbody>
-            {% for record in records %}
+            {% for record in done_records %}
             <tr>
                 <td>{{ record.date_created }}</td>
                 <td>{{ record.donate_name }}</td>

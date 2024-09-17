@@ -74,7 +74,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'website_mabar.wsgi.application'
+WSGI_APPLICATION = 'website_mabar.wsgi.app'
 
 
 # Database

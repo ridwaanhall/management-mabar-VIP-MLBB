@@ -4,3 +4,4 @@ et-xmlfile==1.1.0
 openpyxl==3.1.5
 sqlparse==0.5.1
 tzdata==2024.1
+whitenoise==6.7.0

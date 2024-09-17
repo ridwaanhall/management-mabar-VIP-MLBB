@@ -56,6 +56,7 @@ class MabarAdmin(admin.ModelAdmin):
     def colored_status(self, obj):
         color = {
             'antri': 'orange',
+            'antri_scrim': 'orange',
             'prepare': 'blue',
             'in_mabar': 'lightgreen',
             'salah_id': 'red',

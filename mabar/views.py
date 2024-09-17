@@ -4,13 +4,13 @@ from .models import Mabar, BonusSkin, RequestHero
 # View untuk menampilkan daftar Mabar Record
 def mabar_list(request):
     records = Mabar.objects.all().order_by('date_created')
-    records_show_all_except_done = records.filter(is_done=False)
+    records_show_all_except_done_and_except_prepare = records.filter(is_done=False, status__in=['antri', 'antri_scrim', 'in_mabar', 'salah_id', 'kurang', 'done'])
     records_filter_by_status_prepare = records.filter(status='prepare', is_done=False)
     records_show_all_done = records.filter(is_done=True)
     
     context = {
         'records_all': records,
-        'records_except_done': records_show_all_except_done,
+        'records_except_done': records_show_all_except_done_and_except_prepare,
         'prepare_records': records_filter_by_status_prepare,
         'done_records': records_show_all_done
     }

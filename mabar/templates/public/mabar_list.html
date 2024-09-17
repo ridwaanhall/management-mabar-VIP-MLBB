@@ -36,8 +36,10 @@
                 <td>
                     {% if prepare.status == 'done' %}
                         <span class="badge" style="background-color: green; color: white;">Selesai</span>
-                    {% elif prepare.status == 'antri' %}
-                        <span class="badge" style="background-color: orange; color: white;">Dalam Antrian</span>
+                    {% elif record.status == 'antri' %}
+                        <span class="badge" style="background-color: orange; color: white;">Antri Mabar</span>
+                    {% elif record.status == 'antri_scrim' %}
+                        <span class="badge" style="background-color: rgb(0, 217, 255); color: rgb(0, 0, 0);">Antri Scrim</span>
                     {% elif prepare.status == 'prepare' %}
                         <span class="badge" style="background-color: blue; color: white;">Persiapan</span>
                     {% elif prepare.status == 'in_mabar' %}
@@ -104,7 +106,9 @@
                     {% if record.status == 'done' %}
                         <span class="badge" style="background-color: green; color: white;">Selesai</span>
                     {% elif record.status == 'antri' %}
-                        <span class="badge" style="background-color: orange; color: white;">Dalam Antrian</span>
+                        <span class="badge" style="background-color: orange; color: white;">Antri Mabar</span>
+                    {% elif record.status == 'antri_scrim' %}
+                        <span class="badge" style="background-color: rgb(0, 217, 255); color: rgb(0, 0, 0);">Antri Scrim</span>
                     {% elif record.status == 'prepare' %}
                         <span class="badge" style="background-color: blue; color: white;">Persiapan</span>
                     {% elif record.status == 'in_mabar' %}
@@ -170,7 +174,9 @@
                     {% if record.status == 'done' %}
                         <span class="badge" style="background-color: green; color: white;">Selesai</span>
                     {% elif record.status == 'antri' %}
-                        <span class="badge" style="background-color: orange; color: white;">Dalam Antrian</span>
+                        <span class="badge" style="background-color: orange; color: white;">Antri Mabar</span>
+                    {% elif record.status == 'antri_scrim' %}
+                        <span class="badge" style="background-color: rgb(0, 217, 255); color: rgb(0, 0, 0);">Antri Scrim</span>
                     {% elif record.status == 'prepare' %}
                         <span class="badge" style="background-color: blue; color: white;">Persiapan</span>
                     {% elif record.status == 'in_mabar' %}

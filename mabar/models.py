@@ -40,7 +40,7 @@ class Mabar(models.Model):
         verbose_name="Digunakan"
     )
     catatan = models.TextField(
-        default="Dalam antrian... Harap selalu pantau update status dan catatan, yaa!!",
+        default="Pantau Status mabarmu!",
         blank=True, 
         null=True, 
         verbose_name="Catatan"

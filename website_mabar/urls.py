@@ -4,7 +4,7 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', lambda request: redirect('admin/mabar/mabar/')),
+    path('', lambda request: redirect('public/list-mabar/')),
     path('public/', include('mabar.urls')),
     path('public/', lambda request: redirect('list-mabar/')),
 ]

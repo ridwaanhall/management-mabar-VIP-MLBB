@@ -3,7 +3,8 @@ from django.utils import timezone
 
 class Mabar(models.Model):
     STATUS_CHOICES = [
-        ('antri', 'Dalam Antrian'),
+        ('antri', 'Antri Mabar'),
+        ('antri_scrim', 'Antri Scrim'),
         ('salah_id', 'Salah ID User'),
         ('kurang', 'Donasi Kurang'),
         ('prepare', 'Persiapan'),
@@ -46,7 +47,7 @@ class Mabar(models.Model):
         verbose_name="Catatan"
     )
     status = models.CharField(
-        max_length=10, 
+        max_length=20, 
         choices=STATUS_CHOICES, 
         default='antri', 
         verbose_name="Status"

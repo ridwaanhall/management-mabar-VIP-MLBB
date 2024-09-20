@@ -5,7 +5,7 @@ import openpyxl
 from django.contrib import admin
 from django.utils.html import format_html
 from django.http import HttpResponse
-from .models import Mabar, BonusSkin, RequestHero
+from .models import KomenAlbum, Mabar, BonusSkin, RequestHero
 from django.utils.timezone import localtime
 
 class DateRangeFilter(admin.SimpleListFilter):
@@ -182,3 +182,9 @@ class RequestHeroAdmin(admin.ModelAdmin):
     list_display = ('date_created', 'donate_name', 'type_request', 'hero_name', 'type_lane', 'count', 'is_done', 'catatan')
     list_filter = ('type_request', 'is_done')
     search_fields = ('donate_name', 'hero_name')
+    
+@admin.register(KomenAlbum)
+class KomenAlbumAdmin(admin.ModelAdmin):
+    list_display = ('date_created', 'donate_name', 'id_user_game', 'zone_user_game', 'keterangan', 'is_done', 'done_at')
+    list_filter = ('is_done', 'zone_user_game')
+    search_fields = ('donate_name', 'id_user_game', 'zone_user_game')

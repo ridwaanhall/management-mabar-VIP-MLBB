@@ -157,3 +157,44 @@ class RequestHero(models.Model):
 
     def __str__(self):
         return f"{self.donate_name} - {self.hero_name} ({self.count} request)"
+    
+    
+class KomenAlbum(models.Model):
+    donate_name = models.CharField(
+        max_length=100,
+        verbose_name="Nama Pendonasi"
+    )
+    id_user_game = models.CharField(
+        max_length=50,
+        verbose_name="ID User Game"
+    )
+    zone_user_game = models.CharField(
+        max_length=10,
+        verbose_name="Zone User Game"
+    )
+    keterangan = models.TextField(
+        blank=True,
+        verbose_name="Keterangan"
+    )
+    is_done = models.BooleanField(
+        default=False,
+        verbose_name="Sudah Selesai"
+    )
+    done_at = models.DateTimeField(
+        null=True,
+        blank=True,
+        verbose_name="Selesai Pada"
+    )
+
+    date_created = models.DateTimeField(
+        auto_now_add=True,
+        verbose_name="Tanggal Dibuat"
+    )
+
+    class Meta:
+        verbose_name = 'Komen Album'
+        verbose_name_plural = 'Komen Albums'
+        ordering = ['-date_created']
+
+    def __str__(self):
+        return f"{self.donate_name} - {self.id_user_game}"

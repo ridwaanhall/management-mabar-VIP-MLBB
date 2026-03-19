@@ -34,8 +34,12 @@ class DateRangeFilter(admin.SimpleListFilter):
         elif self.value() == 'last_month':
             last_month = now.month - 1 if now.month > 1 else 12
             year = now.year if now.month > 1 else now.year - 1
-            start_date = timezone.make_aware(datetime.date(year, last_month, 1))
-            end_date = timezone.make_aware(datetime.date(year, last_month + 1, 1))
+            start_date = timezone.make_aware(datetime.datetime(year, last_month, 1))
+            # Handle December to January transition
+            if last_month == 12:
+                end_date = timezone.make_aware(datetime.datetime(year + 1, 1, 1))
+            else:
+                end_date = timezone.make_aware(datetime.datetime(year, last_month + 1, 1))
             return queryset.filter(date_created__range=(start_date, end_date))
         else:
             return queryset
@@ -142,21 +146,20 @@ class MabarAdmin(admin.ModelAdmin):
         # Create a workbook and a worksheet
         wb = openpyxl.Workbook()
         ws = wb.active
-        ws.title = meta.verbose_name_plural
-
-        # Write the header row
-        ws.append(field_names)
-
-        for obj in queryset:
-            row = []
-            for field in field_names:
-                value = getattr(obj, field)
-                if isinstance(value, datetime.datetime):
-                    # Convert timezone-aware datetime to naive datetime
-                    if value.tzinfo is not None:
-                        value = localtime(value).replace(tzinfo=None)
-                row.append(value)
-            ws.append(row)
+        if ws is not None:
+            ws.title = str(meta.verbose_name_plural)
+            # Write the header row
+            ws.append(field_names)
+            for obj in queryset:
+                row = []
+                for field in field_names:
+                    value = getattr(obj, field)
+                    if isinstance(value, datetime.datetime):
+                        # Convert timezone-aware datetime to naive datetime
+                        if value.tzinfo is not None:
+                            value = localtime(value).replace(tzinfo=None)
+                    row.append(value)
+                ws.append(row)
         
         # Save the workbook to a BytesIO object
         output = BytesIO()

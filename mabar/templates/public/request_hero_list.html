@@ -3,51 +3,69 @@
 {% block title %}Daftar Request Hero{% endblock %}
 
 {% block content %}
-<h1 class="text-center mb-4">Daftar Request Hero</h1>
+<h1 class="text-3xl font-bold text-center mb-8">Daftar Request Hero</h1>
 
-<div class="table-responsive">
-    <table class="table table-bordered table-striped">
-        <thead class="table-dark">
+<div class="overflow-x-auto">
+    <table class="min-w-full divide-y divide-gray-200 bg-white rounded-lg shadow">
+        <thead class="bg-gray-100">
             <tr>
-                <th scope="col">Tanggal Dibuat</th>
-                <th scope="col">Pendonasi</th>
-                <th scope="col">Type Request</th>
-                <th scope="col">Hero</th>
-                <th scope="col">Type Lane</th>
-                <th scope="col">Jumlah Request</th>
-                <th scope="col">Sudah Selesai</th>
-                <th scope="col">Catatan</th>
+                <th class="px-4 py-2 text-left text-xs font-semibold text-gray-700">Tanggal Dibuat</th>
+                <th class="px-4 py-2 text-left text-xs font-semibold text-gray-700">Pendonasi</th>
+                <th class="px-4 py-2 text-left text-xs font-semibold text-gray-700">Type Request</th>
+                <th class="px-4 py-2 text-left text-xs font-semibold text-gray-700">Hero</th>
+                <th class="px-4 py-2 text-left text-xs font-semibold text-gray-700">Type Lane</th>
+                <th class="px-4 py-2 text-left text-xs font-semibold text-gray-700">Jumlah Request</th>
+                <th class="px-4 py-2 text-left text-xs font-semibold text-gray-700">Sudah Selesai</th>
+                <th class="px-4 py-2 text-left text-xs font-semibold text-gray-700">Catatan</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody class="divide-y divide-gray-100">
             {% for request in requests %}
-            <tr>
-                <td>{{ request.date_created }}</td>
-                <td>{{ request.donate_name }}</td>
-                <td>
+            <tr class="hover:bg-gray-50">
+                <td class="px-4 py-2">{{ request.date_created|date:'Y-m-d H:i' }}</td>
+                <td class="px-4 py-2">{{ request.donate_name }}</td>
+                <td class="px-4 py-2">
                     {% if request.type_request == 'meta' %}
-                        <span class="badge bg-primary">Meta</span>
+                        <span class="inline-block px-2 py-1 rounded bg-blue-600 text-white text-xs font-semibold">Meta</span>
                     {% elif request.type_request == 'non_meta' %}
-                        <span class="badge bg-secondary">Non-Meta</span>
+                        <span class="inline-block px-2 py-1 rounded bg-gray-500 text-white text-xs font-semibold">Non-Meta</span>
                     {% elif request.type_request == 'troll' %}
-                        <span class="badge bg-warning">Troll</span>
+                        <span class="inline-block px-2 py-1 rounded bg-yellow-400 text-black text-xs font-semibold">Troll</span>
                     {% elif request.type_request == 'lain' %}
-                        <span class="badge bg-info">Lain-lain</span>
+                        <span class="inline-block px-2 py-1 rounded bg-cyan-400 text-black text-xs font-semibold">Lain-lain</span>
                     {% endif %}
                 </td>
-                <td>{{ request.hero_name }}</td>
-                <td>
+                <td class="px-4 py-2">{{ request.hero_name }}</td>
+                <td class="px-4 py-2">
                     {% if request.type_lane == 'roam' %}
-                        <span class="badge bg-primary">Roam</span>
+                        <span class="inline-block px-2 py-1 rounded bg-blue-600 text-white text-xs font-semibold">Roam</span>
                     {% elif request.type_lane == 'gold' %}
-                        <span class="badge bg-secondary">Gold</span>
+                        <span class="inline-block px-2 py-1 rounded bg-yellow-600 text-white text-xs font-semibold">Gold</span>
                     {% elif request.type_lane == 'jungle' %}
-                        <span class="badge bg-warning">Jungle</span>
+                        <span class="inline-block px-2 py-1 rounded bg-green-500 text-white text-xs font-semibold">Jungle</span>
                     {% elif request.type_lane == 'mid' %}
-                        <span class="badge bg-info">Mid</span>
+                        <span class="inline-block px-2 py-1 rounded bg-cyan-400 text-black text-xs font-semibold">Mid</span>
                     {% elif request.type_lane == 'exp' %}
-                        <span class="badge bg-danger">EXP</span>
+                        <span class="inline-block px-2 py-1 rounded bg-red-500 text-white text-xs font-semibold">EXP</span>
                     {% elif request.type_lane == 'bebas' %}
+                        <span class="inline-block px-2 py-1 rounded bg-gray-400 text-white text-xs font-semibold">Bebas</span>
+                    {% endif %}
+                </td>
+                <td class="px-4 py-2">{{ request.count }}</td>
+                <td class="px-4 py-2 text-center">
+                    {% if request.is_done %}
+                        <i class="ti ti-circle-check-filled text-green-600"></i>
+                    {% else %}
+                        <i class="ti ti-xbox-x-filled text-red-500"></i>
+                    {% endif %}
+                </td>
+                <td class="px-4 py-2">{{ request.catatan }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
                         <span class="badge bg-success">Bebas</span>
                     {% endif %}
                 </td>

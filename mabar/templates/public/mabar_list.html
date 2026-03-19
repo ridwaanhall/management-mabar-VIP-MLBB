@@ -3,68 +3,68 @@
 {% block title %}Daftar Mabar{% endblock %}
 
 {% block content %}
-<h1 class="text-center mb-4">Daftar Mabar</h1>
+<h1 class="text-3xl font-bold text-center mb-8">Daftar Mabar</h1>
 
-<!-- prepare records table -->
-<div class="table-responsive mb-2">
-    <table class="table table-bordered table-striped">
-        <thead class="table-dark">
+<!-- Tabel Persiapan -->
+<div class="overflow-x-auto mb-8">
+    <table class="min-w-full divide-y divide-gray-200 bg-white rounded-lg shadow">
+        <thead class="bg-gray-100">
             <tr>
-                <th scope="col">Tanggal Dibuat</th>
-                <th scope="col">Pendonasi</th>
-                <th scope="col">Jumlah</th>
-                <th scope="col">Used</th>
-                <th scope="col">Nickname</th>
-                <th scope="col">ID</th>
-                <th scope="col">Zone</th>
-                <th scope="col">Status</th>
-                <th scope="col">Catatan</th>
-                <th scope="col">VVIP</th>
-                <th scope="col">Done</th>
+                <th class="px-4 py-2 text-left text-xs font-semibold text-gray-700">Tanggal Dibuat</th>
+                <th class="px-4 py-2 text-left text-xs font-semibold text-gray-700">Pendonasi</th>
+                <th class="px-4 py-2 text-left text-xs font-semibold text-gray-700">Jumlah</th>
+                <th class="px-4 py-2 text-left text-xs font-semibold text-gray-700">Used</th>
+                <th class="px-4 py-2 text-left text-xs font-semibold text-gray-700">Nickname</th>
+                <th class="px-4 py-2 text-left text-xs font-semibold text-gray-700">ID</th>
+                <th class="px-4 py-2 text-left text-xs font-semibold text-gray-700">Zone</th>
+                <th class="px-4 py-2 text-left text-xs font-semibold text-gray-700">Status</th>
+                <th class="px-4 py-2 text-left text-xs font-semibold text-gray-700">Catatan</th>
+                <th class="px-4 py-2 text-left text-xs font-semibold text-gray-700">VVIP</th>
+                <th class="px-4 py-2 text-left text-xs font-semibold text-gray-700">Done</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody class="divide-y divide-gray-100">
             {% for prepare in prepare_records %}
-            <tr>
-                <td>{{ prepare.date_created }}</td>
-                <td>{{ prepare.donate_name }}</td>
-                <td>{{ prepare.jumlah_game }}</td>
-                <td>{{ prepare.telah_digunakan }}</td>
-                <td>{{ prepare.nickname }}</td>
-                <td>{{ prepare.id_user }}</td>
-                <td>{{ prepare.zone_user }}</td>
-                <td>
+            <tr class="hover:bg-gray-50">
+                <td class="px-4 py-2">{{ prepare.date_created|date:'Y-m-d H:i' }}</td>
+                <td class="px-4 py-2">{{ prepare.donate_name }}</td>
+                <td class="px-4 py-2">{{ prepare.jumlah_game }}</td>
+                <td class="px-4 py-2">{{ prepare.telah_digunakan }}</td>
+                <td class="px-4 py-2">{{ prepare.nickname }}</td>
+                <td class="px-4 py-2">{{ prepare.id_user }}</td>
+                <td class="px-4 py-2">{{ prepare.zone_user }}</td>
+                <td class="px-4 py-2">
                     {% if prepare.status == 'done' %}
-                        <span class="badge" style="background-color: green; color: white;">Selesai</span>
-                    {% elif record.status == 'antri' %}
-                        <span class="badge" style="background-color: orange; color: white;">Antri Mabar</span>
-                    {% elif record.status == 'antri_scrim' %}
-                        <span class="badge" style="background-color: rgb(0, 217, 255); color: rgb(0, 0, 0);">Antri Scrim</span>
+                        <span class="inline-block px-2 py-1 rounded bg-green-500 text-white text-xs font-semibold">Selesai</span>
+                    {% elif prepare.status == 'antri' %}
+                        <span class="inline-block px-2 py-1 rounded bg-orange-400 text-white text-xs font-semibold">Antri Mabar</span>
+                    {% elif prepare.status == 'antri_scrim' %}
+                        <span class="inline-block px-2 py-1 rounded bg-cyan-400 text-black text-xs font-semibold">Antri Scrim</span>
                     {% elif prepare.status == 'prepare' %}
-                        <span class="badge" style="background-color: blue; color: white;">Persiapan</span>
+                        <span class="inline-block px-2 py-1 rounded bg-blue-500 text-white text-xs font-semibold">Persiapan</span>
                     {% elif prepare.status == 'in_mabar' %}
-                        <span class="badge" style="background-color: lightgreen; color: black;">Sedang Mabar</span>
+                        <span class="inline-block px-2 py-1 rounded bg-green-200 text-black text-xs font-semibold">Sedang Mabar</span>
                     {% elif prepare.status == 'salah_id' %}
-                        <span class="badge" style="background-color: red; color: white;">Salah ID User</span>
+                        <span class="inline-block px-2 py-1 rounded bg-red-500 text-white text-xs font-semibold">Salah ID User</span>
                     {% elif prepare.status == 'kurang' %}
-                        <span class="badge" style="background-color: red; color: white;">Donasi Kurang</span>
+                        <span class="inline-block px-2 py-1 rounded bg-red-400 text-white text-xs font-semibold">Donasi Kurang</span>
                     {% else %}
-                        <span class="badge" style="background-color: grey; color: white;">{{ prepare.status }}</span>
+                        <span class="inline-block px-2 py-1 rounded bg-gray-400 text-white text-xs font-semibold">{{ prepare.status }}</span>
                     {% endif %}
                 </td>
-                <td>{{ prepare.catatan }}</td>
-                <td>
+                <td class="px-4 py-2">{{ prepare.catatan }}</td>
+                <td class="px-4 py-2 text-center">
                     {% if prepare.is_vvip %}
-                        <i class="ti ti-circle-check-filled text-primary"></i>
+                        <i class="ti ti-circle-check-filled text-blue-600"></i>
                     {% else %}
-                        <i class="ti ti-xbox-x-filled text-secondary"></i>
+                        <i class="ti ti-xbox-x-filled text-gray-400"></i>
                     {% endif %}
                 </td>
-                <td>
+                <td class="px-4 py-2 text-center">
                     {% if prepare.is_done %}
-                        <i class="ti ti-circle-check-filled text-success"></i>
+                        <i class="ti ti-circle-check-filled text-green-600"></i>
                     {% else %}
-                        <i class="ti ti-xbox-x-filled text-danger"></i>
+                        <i class="ti ti-xbox-x-filled text-red-500"></i>
                     {% endif %}
                 </td>
             </tr>
@@ -72,32 +72,123 @@
         </tbody>
     </table>
 </div>
-<!-- prepare records table end -->
 
-<!-- records except done -->
-<div class="table-responsive">
-    <table class="table table-bordered table-striped">
-        <thead class="table-dark">
+<!-- Tabel Semua Kecuali Done -->
+<div class="overflow-x-auto mb-8">
+    <table class="min-w-full divide-y divide-gray-200 bg-white rounded-lg shadow">
+        <thead class="bg-gray-100">
             <tr>
-                <th scope="col">Tanggal Dibuat</th>
-                <th scope="col">Pendonasi</th>
-                <th scope="col">Jumlah</th>
-                <th scope="col">Used</th>
-                <th scope="col">Nickname</th>
-                <th scope="col">ID</th>
-                <th scope="col">Zone</th>
-                <th scope="col">Status</th>
-                <th scope="col">Catatan</th>
-                <th scope="col">VVIP</th>
-                <th scope="col">Done</th>
+                <th class="px-4 py-2 text-left text-xs font-semibold text-gray-700">Tanggal Dibuat</th>
+                <th class="px-4 py-2 text-left text-xs font-semibold text-gray-700">Pendonasi</th>
+                <th class="px-4 py-2 text-left text-xs font-semibold text-gray-700">Jumlah</th>
+                <th class="px-4 py-2 text-left text-xs font-semibold text-gray-700">Used</th>
+                <th class="px-4 py-2 text-left text-xs font-semibold text-gray-700">Nickname</th>
+                <th class="px-4 py-2 text-left text-xs font-semibold text-gray-700">ID</th>
+                <th class="px-4 py-2 text-left text-xs font-semibold text-gray-700">Zone</th>
+                <th class="px-4 py-2 text-left text-xs font-semibold text-gray-700">Status</th>
+                <th class="px-4 py-2 text-left text-xs font-semibold text-gray-700">Catatan</th>
+                <th class="px-4 py-2 text-left text-xs font-semibold text-gray-700">VVIP</th>
+                <th class="px-4 py-2 text-left text-xs font-semibold text-gray-700">Done</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody class="divide-y divide-gray-100">
             {% for record in records_except_done %}
+            <tr class="hover:bg-gray-50">
+                <td class="px-4 py-2">{{ record.date_created|date:'Y-m-d H:i' }}</td>
+                <td class="px-4 py-2">{{ record.donate_name }}</td>
+                <td class="px-4 py-2">{{ record.jumlah_game }}</td>
+                <td class="px-4 py-2">{{ record.telah_digunakan }}</td>
+                <td class="px-4 py-2">{{ record.nickname }}</td>
+                <td class="px-4 py-2">{{ record.id_user }}</td>
+                <td class="px-4 py-2">{{ record.zone_user }}</td>
+                <td class="px-4 py-2">
+                    {% if record.status == 'done' %}
+                        <span class="inline-block px-2 py-1 rounded bg-green-500 text-white text-xs font-semibold">Selesai</span>
+                    {% elif record.status == 'antri' %}
+                        <span class="inline-block px-2 py-1 rounded bg-orange-400 text-white text-xs font-semibold">Antri Mabar</span>
+                    {% elif record.status == 'antri_scrim' %}
+                        <span class="inline-block px-2 py-1 rounded bg-cyan-400 text-black text-xs font-semibold">Antri Scrim</span>
+                    {% elif record.status == 'prepare' %}
+                        <span class="inline-block px-2 py-1 rounded bg-blue-500 text-white text-xs font-semibold">Persiapan</span>
+                    {% elif record.status == 'in_mabar' %}
+                        <span class="inline-block px-2 py-1 rounded bg-green-200 text-black text-xs font-semibold">Sedang Mabar</span>
+                    {% elif record.status == 'salah_id' %}
+                        <span class="inline-block px-2 py-1 rounded bg-red-500 text-white text-xs font-semibold">Salah ID User</span>
+                    {% elif record.status == 'kurang' %}
+                        <span class="inline-block px-2 py-1 rounded bg-red-400 text-white text-xs font-semibold">Donasi Kurang</span>
+                    {% else %}
+                        <span class="inline-block px-2 py-1 rounded bg-gray-400 text-white text-xs font-semibold">{{ record.status }}</span>
+                    {% endif %}
+                </td>
+                <td class="px-4 py-2">{{ record.catatan }}</td>
+                <td class="px-4 py-2 text-center">
+                    {% if record.is_vvip %}
+                        <i class="ti ti-circle-check-filled text-blue-600"></i>
+                    {% else %}
+                        <i class="ti ti-xbox-x-filled text-gray-400"></i>
+                    {% endif %}
+                </td>
+                <td class="px-4 py-2 text-center">
+                    {% if record.is_done %}
+                        <i class="ti ti-circle-check-filled text-green-600"></i>
+                    {% else %}
+                        <i class="ti ti-xbox-x-filled text-red-500"></i>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<!-- Tabel Done -->
+<div class="overflow-x-auto">
+    <table class="min-w-full divide-y divide-gray-200 bg-white rounded-lg shadow">
+        <thead class="bg-gray-100">
             <tr>
-                <td>{{ record.date_created }}</td>
-                <td>{{ record.donate_name }}</td>
-                <td>{{ record.jumlah_game }}</td>
+                <th class="px-4 py-2 text-left text-xs font-semibold text-gray-700">Tanggal Dibuat</th>
+                <th class="px-4 py-2 text-left text-xs font-semibold text-gray-700">Pendonasi</th>
+                <th class="px-4 py-2 text-left text-xs font-semibold text-gray-700">Jumlah</th>
+                <th class="px-4 py-2 text-left text-xs font-semibold text-gray-700">Used</th>
+                <th class="px-4 py-2 text-left text-xs font-semibold text-gray-700">Nickname</th>
+                <th class="px-4 py-2 text-left text-xs font-semibold text-gray-700">ID</th>
+                <th class="px-4 py-2 text-left text-xs font-semibold text-gray-700">Zone</th>
+                <th class="px-4 py-2 text-left text-xs font-semibold text-gray-700">Status</th>
+                <th class="px-4 py-2 text-left text-xs font-semibold text-gray-700">Catatan</th>
+                <th class="px-4 py-2 text-left text-xs font-semibold text-gray-700">VVIP</th>
+                <th class="px-4 py-2 text-left text-xs font-semibold text-gray-700">Done</th>
+            </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-100">
+            {% for done in done_records %}
+            <tr class="hover:bg-gray-50">
+                <td class="px-4 py-2">{{ done.date_created|date:'Y-m-d H:i' }}</td>
+                <td class="px-4 py-2">{{ done.donate_name }}</td>
+                <td class="px-4 py-2">{{ done.jumlah_game }}</td>
+                <td class="px-4 py-2">{{ done.telah_digunakan }}</td>
+                <td class="px-4 py-2">{{ done.nickname }}</td>
+                <td class="px-4 py-2">{{ done.id_user }}</td>
+                <td class="px-4 py-2">{{ done.zone_user }}</td>
+                <td class="px-4 py-2">
+                    <span class="inline-block px-2 py-1 rounded bg-green-500 text-white text-xs font-semibold">Selesai</span>
+                </td>
+                <td class="px-4 py-2">{{ done.catatan }}</td>
+                <td class="px-4 py-2 text-center">
+                    {% if done.is_vvip %}
+                        <i class="ti ti-circle-check-filled text-blue-600"></i>
+                    {% else %}
+                        <i class="ti ti-xbox-x-filled text-gray-400"></i>
+                    {% endif %}
+                </td>
+                <td class="px-4 py-2 text-center">
+                    <i class="ti ti-circle-check-filled text-green-600"></i>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
                 <td>{{ record.telah_digunakan }}</td>
                 <td>{{ record.nickname }}</td>
                 <td>{{ record.id_user }}</td>

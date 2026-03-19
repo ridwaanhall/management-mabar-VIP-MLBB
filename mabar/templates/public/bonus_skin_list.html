@@ -1,37 +1,38 @@
+
 {% extends 'public/base.html' %}
 
 {% block title %}Daftar Bonus Skin{% endblock %}
 
 {% block content %}
-<h1 class="text-center mb-4">Daftar Bonus Skin</h1>
+<h1 class="text-3xl font-bold text-center mb-8">Daftar Bonus Skin</h1>
 
-<div class="table-responsive">
-    <table class="table table-bordered table-striped">
-        <thead class="table-dark">
+<div class="overflow-x-auto">
+    <table class="min-w-full divide-y divide-gray-200 bg-white rounded-lg shadow">
+        <thead class="bg-gray-100">
             <tr>
-                <th scope="col">Tanggal Dibuat</th>
-                <th scope="col">User</th>
-                <th scope="col">Hero Digunakan</th>
-                <th scope="col">Skin Request</th>
-                <th scope="col">Terkirim</th>
-                <th scope="col">Terkirim Pada</th>
+                <th class="px-4 py-2 text-left text-xs font-semibold text-gray-700">Tanggal Dibuat</th>
+                <th class="px-4 py-2 text-left text-xs font-semibold text-gray-700">User</th>
+                <th class="px-4 py-2 text-left text-xs font-semibold text-gray-700">Hero Digunakan</th>
+                <th class="px-4 py-2 text-left text-xs font-semibold text-gray-700">Skin Request</th>
+                <th class="px-4 py-2 text-left text-xs font-semibold text-gray-700">Terkirim</th>
+                <th class="px-4 py-2 text-left text-xs font-semibold text-gray-700">Terkirim Pada</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody class="divide-y divide-gray-100">
             {% for skin in skins %}
-            <tr>
-                <td>{{ skin.date_created }}</td>
-                <td>{{ skin.mabar }}</td>
-                <td>{{ skin.hero_digunakan }}</td>
-                <td>{{ skin.skin_request }}</td>
-                <td>
+            <tr class="hover:bg-gray-50">
+                <td class="px-4 py-2">{{ skin.date_created|date:'Y-m-d H:i' }}</td>
+                <td class="px-4 py-2">{{ skin.mabar }}</td>
+                <td class="px-4 py-2">{{ skin.hero_digunakan }}</td>
+                <td class="px-4 py-2">{{ skin.skin_request }}</td>
+                <td class="px-4 py-2 text-center">
                     {% if skin.terkirim %}
-                        <i class="ti ti-circle-check-filled text-success"></i>
+                        <i class="ti ti-circle-check-filled text-green-600"></i>
                     {% else %}
-                        <i class="ti ti-xbox-x-filled text-danger"></i>
+                        <i class="ti ti-xbox-x-filled text-red-500"></i>
                     {% endif %}
-                </td>                
-                <td>{{ skin.date_terkirim }}</td>
+                </td>
+                <td class="px-4 py-2">{{ skin.date_terkirim|date:'Y-m-d H:i' }}</td>
             </tr>
             {% endfor %}
         </tbody>

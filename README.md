@@ -13,7 +13,7 @@ Project ini dibuat untuk memudahkan streamer perintis untuk mendata dan memanage
 1. Clone this repository
 
     ```bash
-    git clone https://github.com/Anon404/website_mabar.git
+    git clone https://github.com/ridwaanhall/management-mabar-VIP-MLBB.git
     ```
 
 2. Install requirements
@@ -107,4 +107,4 @@ Visit this website url:
 
 [MIT License](https://github.com/ridwaanhall/management-mabar-VIP-MLBB/blob/main/LICENSE)
 
-Copyright (c) 2024 [ridwaanhall](https://github.com/ridwaanhall)
+Copyright (c) 2026 [ridwaanhall](https://github.com/ridwaanhall)

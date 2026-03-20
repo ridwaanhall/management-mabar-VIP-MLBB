@@ -1,110 +1,92 @@
-# Pendataan Mabar VIP pada Game MLBB
+# Management Mabar VIP MLBB
 
-## Overview
-
-Project ini dibuat untuk memudahkan streamer perintis untuk mendata dan memanage siapa saja yang ikut mabar, request hero, dan request skin.
+A Django web application for managing and tracking VIP Mabar (play together) sessions, bonus skin requests, and hero requests for Mobile Legends: Bang Bang (MLBB) streamers and their communities.
 
 ## Features
 
-- soon
+- **Mabar Management:** Track, update, and manage Mabar sessions with status, notes, and VVIP flags.
+- **Bonus Skin Requests:** Record and process bonus skin requests linked to Mabar sessions.
+- **Hero Requests:** Allow users to request specific heroes and lanes, with status tracking.
+- **Admin Dashboard:** Full CRUD for all models, with advanced filtering and export (CSV/XLSX) in Django admin.
+- **Modern Public Interface:** Responsive UI using Tailwind CSS and neumorphism design, with status badges and toggle switches.
+- **Authentication:** Admin-only CRUD, public read-only access to lists and details.
+- **Deployment Ready:** Configured for Vercel serverless deployment.
 
-## Preparation
+## Project Structure
 
-1. Clone this repository
+- `mabar/` — Django app with models, forms, views, templates, and admin customization
+- `website_mabar/` — Django project configuration
+- `static/` — Custom static files (CSS, JS, images)
+- `templates/public/` — Tailwind + neumorphism templates for public and admin views
+- `vercel.json` — Vercel deployment configuration
 
-    ```bash
-    git clone https://github.com/ridwaanhall/management-mabar-VIP-MLBB.git
-    ```
+## Getting Started
 
-2. Install requirements
+### Prerequisites
 
-    ```bash
-    pip install -r requirements.txt
-    ```
+- Python 3.10+
+- pip
 
-3. Make migrations and migrate
+### Installation
 
-    ```bash
-    python manage.py makemigrations
-    python manage.py migrate
-    ```
+1. Clone the repository:
 
-4. Create superuser and input credentials
+   ```bash
+   git clone https://github.com/ridwaanhall/management-mabar-VIP-MLBB.git
+   cd management-mabar-VIP-MLBB
+   ```
 
-    ```bash
-    python manage.py createsuperuser
-    ```
+2. Install dependencies:
 
-5. Run server
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-    ```bash
-    python manage.py runserver
-    ```
+3. Apply migrations:
 
-6. Visit the site
+   ```bash
+   python manage.py migrate
+   ```
 
-    ```bash
-    http://127.0.0.1:8000/
-    ```
+4. Create a superuser:
 
-## How to use
+   ```bash
+   python manage.py createsuperuser
+   ```
 
-### Admin
+5. Run the development server:
 
-1. Login as admin
+   ```bash
+   python manage.py runserver
+   ```
 
-    ```bash
-    http://127.0.0.1:8000/admin/
-    ```
+### Usage
 
-2. Add Mabar
+- **Admin Panel:**
+  - Access: `http://127.0.0.1:8000/admin/`
+  - Manage Mabar, Bonus Skin, and Request Hero records.
 
-    ```bash
-    http://127.0.0.1:8000/admin/mabar/mabar/add/
-    ```
+- **Public Pages:**
+  - Mabar List: `http://127.0.0.1:8000/public/list-mabar/`
+  - Bonus Skin List: `http://127.0.0.1:8000/public/list-free-skin/`
+  - Request Hero List: `http://127.0.0.1:8000/public/list-req-hero/`
 
-3. Add Request Hero
+## Deployment
 
-    ```bash
-    http://127.0.0.1:8000/admin/mabar/requesthero/add/
-    ```
+This project is ready for deployment on Vercel (serverless):
 
-4. Add Bonus Skin
+- See `vercel.json` for configuration.
+- Static files are served using Whitenoise.
+- Set environment variables (e.g., `DEBUG`, `SECRET_KEY`) as needed.
 
-    ```bash
-    http://127.0.0.1:8000/admin/mabar/bonusskin/add/
-    ```
+## Technologies Used
 
-### Public
-
-Visit this website url:
-
-- for mabar list
-
-    Mengecek Status Mabar
-
-    ```bash
-    http://127.0.0.1:8000/public/list-mabar/
-    ```
-
-- for request hero list
-
-    Mengecek Request Hero
-
-    ```bash
-    http://127.0.0.1:8000/public/list-req-hero/
-    ```
-
-- for bonus skin list
-
-    Mengecek Bonus Skin
-
-    ```bash
-    http://127.0.0.1:8000/public/list-free-skin/
-    ```
+- Django 6.x
+- Tailwind CSS (CDN)
+- Neumorphism custom CSS
+- Whitenoise (static files)
+- openpyxl (admin export)
 
 ## License
 
-[MIT License](https://github.com/ridwaanhall/management-mabar-VIP-MLBB/blob/main/LICENSE)
-
-Copyright (c) 2026 [ridwaanhall](https://github.com/ridwaanhall)
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.

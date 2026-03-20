@@ -1,0 +1,15 @@
+{% extends 'public/base.html' %}
+
+{% block title %}{{ action }} Mabar{% endblock %}
+
+{% block content %}
+<div class="max-w-xl mx-auto mt-8">
+    <h1 class="text-2xl font-bold mb-4">{{ action }} Data Mabar</h1>
+    <form method="post" class="space-y-4 bg-white p-6 rounded shadow">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded">Simpan</button>
+        <a href="{% url 'mabar_list' %}" class="ml-4 text-gray-600">Batal</a>
+    </form>
+</div>
+{% endblock %}

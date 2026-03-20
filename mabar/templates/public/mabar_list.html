@@ -3,7 +3,13 @@
 {% block title %}Daftar Mabar{% endblock %}
 
 {% block content %}
-<h1 class="text-3xl font-bold text-center mb-8">Daftar Mabar</h1>
+
+<div class="flex justify-between items-center mb-8">
+    <h1 class="text-3xl font-bold">Daftar Mabar</h1>
+    {% if user.is_authenticated %}
+        <a href="{% url 'mabar_create' %}" class="bg-blue-600 text-white px-4 py-2 rounded">Tambah Mabar</a>
+    {% endif %}
+</div>
 
 <h2 class="text-xl font-semibold mb-2 mt-6">Mabar Status: Persiapan</h2>
 <p class="mb-4 text-gray-600">Daftar mabar yang sedang dalam status <b>Persiapan</b>.</p>
@@ -70,6 +76,19 @@
                         <i class="ti ti-xbox-x-filled text-red-500"></i>
                     {% endif %}
                 </td>
+                {% if user.is_authenticated %}
+                <td class="px-4 py-2 text-center">
+                    <a href="{% url 'mabar_update' prepare.id %}" class="text-blue-600 hover:underline">Edit</a> |
+                    <a href="{% url 'mabar_delete' prepare.id %}" class="text-red-600 hover:underline">Hapus</a>
+                </td>
+                {% endif %}
+                </td>
+                {% if user.is_authenticated %}
+                <td class="px-4 py-2 text-center">
+                    <a href="{% url 'mabar_update' record.id %}" class="text-blue-600 hover:underline">Edit</a> |
+                    <a href="{% url 'mabar_delete' record.id %}" class="text-red-600 hover:underline">Hapus</a>
+                </td>
+                {% endif %}
             </tr>
             {% endfor %}
         </tbody>
@@ -253,6 +272,12 @@
                 <td class="px-4 py-2">
                     <span class="inline-block px-2 py-1 rounded bg-green-500 text-white text-xs font-semibold">Selesai</span>
                 </td>
+                {% if user.is_authenticated %}
+                <td class="px-4 py-2 text-center">
+                    <a href="{% url 'mabar_update' record.id %}" class="text-blue-600 hover:underline">Edit</a> |
+                    <a href="{% url 'mabar_delete' record.id %}" class="text-red-600 hover:underline">Hapus</a>
+                </td>
+                {% endif %}
                 <td class="px-4 py-2">{{ done.catatan }}</td>
                 <td class="px-4 py-2 text-center">
                     {% if done.is_vvip %}
@@ -263,6 +288,12 @@
                         <i class="ti ti-xbox-x-filled text-gray-400"></i>
                     {% endif %}
                 </td>
+                {% if user.is_authenticated %}
+                <td class="px-4 py-2 text-center">
+                    <a href="{% url 'mabar_update' done.id %}" class="text-blue-600 hover:underline">Edit</a> |
+                    <a href="{% url 'mabar_delete' done.id %}" class="text-red-600 hover:underline">Hapus</a>
+                </td>
+                {% endif %}
                 <td class="px-4 py-2 text-center">
                     <span class="inline-block px-2 py-1 rounded bg-green-500 text-white text-xs font-semibold">Selesai</span>
                     <i class="ti ti-circle-check-filled text-green-600"></i>

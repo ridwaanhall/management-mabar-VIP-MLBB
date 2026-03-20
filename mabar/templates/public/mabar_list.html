@@ -15,26 +15,26 @@
 <p class="mb-4 text-gray-600">Daftar mabar yang sedang dalam status <b>Persiapan</b>.</p>
 <div class="overflow-x-auto mb-8">
     <table class="min-w-full divide-y divide-gray-200 bg-white rounded-lg shadow">
-        <thead class="bg-gray-100">
+        <thead class="bg-gray-50">
             <tr>
-                <th class="px-4 py-2 text-left text-xs font-semibold text-gray-700">Tanggal Dibuat</th>
-                <th class="px-4 py-2 text-left text-xs font-semibold text-gray-700">Pendonasi</th>
-                <th class="px-4 py-2 text-left text-xs font-semibold text-gray-700">Sisa Mabar</th>
-                <th class="px-4 py-2 text-left text-xs font-semibold text-gray-700">Nickname</th>
-                <th class="px-4 py-2 text-left text-xs font-semibold text-gray-700">ID</th>
-                <th class="px-4 py-2 text-left text-xs font-semibold text-gray-700">Zone</th>
-                <th class="px-4 py-2 text-left text-xs font-semibold text-gray-700">Status</th>
-                <th class="px-4 py-2 text-left text-xs font-semibold text-gray-700">Catatan</th>
-                <th class="px-4 py-2 text-left text-xs font-semibold text-gray-700">VVIP</th>
-                <th class="px-4 py-2 text-left text-xs font-semibold text-gray-700">Done</th>
+                <th class="px-4 py-3 text-left text-xs font-bold text-gray-700 whitespace-nowrap">Tanggal Dibuat</th>
+                <th class="px-4 py-3 text-left text-xs font-bold text-gray-700 whitespace-nowrap">Pendonasi</th>
+                <th class="px-4 py-3 text-left text-xs font-bold text-gray-700 whitespace-nowrap">Sisa Mabar</th>
+                <th class="px-4 py-3 text-left text-xs font-bold text-gray-700 whitespace-nowrap">Nickname</th>
+                <th class="px-4 py-3 text-left text-xs font-bold text-gray-700 whitespace-nowrap">ID</th>
+                <th class="px-4 py-3 text-left text-xs font-bold text-gray-700 whitespace-nowrap">Zone</th>
+                <th class="px-4 py-3 text-left text-xs font-bold text-gray-700 whitespace-nowrap">Status</th>
+                <th class="px-4 py-3 text-left text-xs font-bold text-gray-700 whitespace-nowrap">Catatan</th>
+                <th class="px-4 py-3 text-left text-xs font-bold text-gray-700 whitespace-nowrap">VVIP</th>
+                <th class="px-4 py-3 text-left text-xs font-bold text-gray-700 whitespace-nowrap">Done</th>
                 {% if user.is_authenticated %}
-                <th class="px-4 py-2 text-center text-xs font-semibold text-gray-700">Aksi</th>
+                <th class="px-4 py-3 text-center text-xs font-bold text-gray-700 whitespace-nowrap">Aksi</th>
                 {% endif %}
             </tr>
         </thead>
-        <tbody class="divide-y divide-gray-100">
+        <tbody>
             {% for prepare in prepare_records %}
-            <tr class="hover:bg-gray-50">
+            <tr class="even:bg-gray-50 hover:bg-blue-50 transition-colors duration-100 group">
                 <td class="px-4 py-2">{{ prepare.date_created }}</td>
                 <td class="px-4 py-2">{{ prepare.donate_name }}</td>
                 <td class="px-4 py-2">{{ prepare.sisa_mabar }}</td>
@@ -60,23 +60,19 @@
                         <span class="inline-block px-2 py-1 rounded bg-gray-400 text-white text-xs font-semibold">{{ prepare.status }}</span>
                     {% endif %}
                 </td>
-                <td class="px-4 py-2">{{ prepare.catatan }}</td>
+                <td class="px-4 py-2 max-w-xs truncate" title="{{ prepare.catatan }}">{{ prepare.catatan }}</td>
                 <td class="px-4 py-2 text-center">
                     {% if prepare.is_vvip %}
-                        <span class="inline-block px-2 py-1 rounded bg-blue-500 text-white text-xs font-semibold">VVIP</span>
-                        <i class="ti ti-circle-check-filled text-blue-600"></i>
+                        <span class="inline-flex items-center gap-1 px-2 py-1 rounded bg-blue-500 text-white text-xs font-bold" title="VVIP">VVIP <i class="ti ti-circle-check-filled text-white"></i></span>
                     {% else %}
-                        <span class="inline-block px-2 py-1 rounded bg-gray-400 text-white text-xs font-semibold">Biasa</span>
-                        <i class="ti ti-xbox-x-filled text-gray-400"></i>
+                        <span class="inline-flex items-center gap-1 px-2 py-1 rounded bg-gray-400 text-white text-xs font-semibold" title="Biasa">Biasa <i class="ti ti-xbox-x-filled text-white"></i></span>
                     {% endif %}
                 </td>
                 <td class="px-4 py-2 text-center">
                     {% if prepare.is_done %}
-                        <span class="inline-block px-2 py-1 rounded bg-green-500 text-white text-xs font-semibold">Selesai</span>
-                        <i class="ti ti-circle-check-filled text-green-600"></i>
+                        <span class="inline-flex items-center gap-1 px-2 py-1 rounded bg-green-500 text-white text-xs font-bold" title="Selesai">Selesai <i class="ti ti-circle-check-filled text-white"></i></span>
                     {% else %}
-                        <span class="inline-block px-2 py-1 rounded bg-red-500 text-white text-xs font-semibold">Belum</span>
-                        <i class="ti ti-xbox-x-filled text-red-500"></i>
+                        <span class="inline-flex items-center gap-1 px-2 py-1 rounded bg-red-500 text-white text-xs font-bold" title="Belum">Belum <i class="ti ti-xbox-x-filled text-white"></i></span>
                     {% endif %}
                 </td>
                 {% if user.is_authenticated %}

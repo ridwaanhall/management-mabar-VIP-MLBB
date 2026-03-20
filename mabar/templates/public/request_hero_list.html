@@ -12,24 +12,24 @@
 
 <div class="overflow-x-auto">
     <table class="min-w-full divide-y divide-gray-200 bg-white rounded-lg shadow">
-        <thead class="bg-gray-100">
+        <thead class="bg-gray-50">
             <tr>
-                <th class="px-4 py-2 text-left text-xs font-semibold text-gray-700">Tanggal Dibuat</th>
-                <th class="px-4 py-2 text-left text-xs font-semibold text-gray-700">Pendonasi</th>
-                <th class="px-4 py-2 text-left text-xs font-semibold text-gray-700">Type Request</th>
-                <th class="px-4 py-2 text-left text-xs font-semibold text-gray-700">Hero</th>
-                <th class="px-4 py-2 text-left text-xs font-semibold text-gray-700">Type Lane</th>
-                <th class="px-4 py-2 text-left text-xs font-semibold text-gray-700">Jumlah Request</th>
-                <th class="px-4 py-2 text-left text-xs font-semibold text-gray-700">Sudah Selesai</th>
-                <th class="px-4 py-2 text-left text-xs font-semibold text-gray-700">Catatan</th>
+                <th class="px-4 py-3 text-left text-xs font-bold text-gray-700 whitespace-nowrap">Tanggal Dibuat</th>
+                <th class="px-4 py-3 text-left text-xs font-bold text-gray-700 whitespace-nowrap">Pendonasi</th>
+                <th class="px-4 py-3 text-left text-xs font-bold text-gray-700 whitespace-nowrap">Type Request</th>
+                <th class="px-4 py-3 text-left text-xs font-bold text-gray-700 whitespace-nowrap">Hero</th>
+                <th class="px-4 py-3 text-left text-xs font-bold text-gray-700 whitespace-nowrap">Type Lane</th>
+                <th class="px-4 py-3 text-left text-xs font-bold text-gray-700 whitespace-nowrap">Jumlah Request</th>
+                <th class="px-4 py-3 text-left text-xs font-bold text-gray-700 whitespace-nowrap">Sudah Selesai</th>
+                <th class="px-4 py-3 text-left text-xs font-bold text-gray-700 whitespace-nowrap">Catatan</th>
                 {% if user.is_authenticated %}
-                <th class="px-4 py-2 text-center text-xs font-semibold text-gray-700">Aksi</th>
+                <th class="px-4 py-3 text-center text-xs font-bold text-gray-700 whitespace-nowrap">Aksi</th>
                 {% endif %}
             </tr>
         </thead>
-        <tbody class="divide-y divide-gray-100">
+        <tbody>
             {% for request in requests %}
-            <tr class="hover:bg-gray-50">
+            <tr class="even:bg-gray-50 hover:bg-blue-50 transition-colors duration-100 group">
                 <td class="px-4 py-2">{{ request.date_created|date:'Y-m-d H:i' }}</td>
                 <td class="px-4 py-2">{{ request.donate_name }}</td>
                 <td class="px-4 py-2">
@@ -43,7 +43,7 @@
                         <span class="inline-block px-2 py-1 rounded bg-cyan-400 text-black text-xs font-semibold">Lain-lain</span>
                     {% endif %}
                 </td>
-                <td class="px-4 py-2">{{ request.hero_name }}</td>
+                <td class="px-4 py-2 max-w-xs truncate" title="{{ request.hero_name }}">{{ request.hero_name }}</td>
                 <td class="px-4 py-2">
                     {% if request.type_lane == 'roam' %}
                         <span class="inline-block px-2 py-1 rounded bg-blue-600 text-white text-xs font-semibold">Roam</span>
@@ -62,12 +62,12 @@
                 <td class="px-4 py-2">{{ request.count }}</td>
                 <td class="px-4 py-2 text-center">
                     {% if request.is_done %}
-                        <i class="ti ti-circle-check-filled text-green-600"></i>
+                        <span class="inline-flex items-center gap-1 px-2 py-1 rounded bg-green-500 text-white text-xs font-bold" title="Selesai"><i class="ti ti-circle-check-filled text-white"></i> Selesai</span>
                     {% else %}
-                        <i class="ti ti-xbox-x-filled text-red-500"></i>
+                        <span class="inline-flex items-center gap-1 px-2 py-1 rounded bg-red-500 text-white text-xs font-bold" title="Belum Selesai"><i class="ti ti-xbox-x-filled text-white"></i> Belum</span>
                     {% endif %}
                 </td>
-                <td class="px-4 py-2">{{ request.catatan }}</td>
+                <td class="px-4 py-2 max-w-xs truncate" title="{{ request.catatan }}">{{ request.catatan }}</td>
                 {% if user.is_authenticated and request.id %}
                 <td class="px-4 py-2 text-center">
                     <a href="{% url 'request_hero_update' request.id %}" class="text-blue-600 hover:underline">Edit</a> |

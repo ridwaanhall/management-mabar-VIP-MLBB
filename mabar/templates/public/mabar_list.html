@@ -27,6 +27,9 @@
                 <th class="px-4 py-2 text-left text-xs font-semibold text-gray-700">Catatan</th>
                 <th class="px-4 py-2 text-left text-xs font-semibold text-gray-700">VVIP</th>
                 <th class="px-4 py-2 text-left text-xs font-semibold text-gray-700">Done</th>
+                {% if user.is_authenticated %}
+                <th class="px-4 py-2 text-center text-xs font-semibold text-gray-700">Aksi</th>
+                {% endif %}
             </tr>
         </thead>
         <tbody class="divide-y divide-gray-100">
@@ -76,29 +79,12 @@
                         <i class="ti ti-xbox-x-filled text-red-500"></i>
                     {% endif %}
                 </td>
-                {% if user.is_authenticated and prepare.id %}
+                {% if user.is_authenticated %}
                 <td class="px-4 py-2 text-center">
-                    <a href="{% url 'mabar_update' prepare.id %}" class="text-blue-600 hover:underline">Edit</a> |
-                    <a href="{% url 'mabar_delete' prepare.id %}" class="text-red-600 hover:underline">Hapus</a>
-                </td>
-                {% endif %}
-                    {% if user.is_authenticated and prepare.id %}
-                    <td class="px-4 py-2 text-center">
+                    {% if prepare.id %}
                         <a href="{% url 'mabar_update' prepare.id %}" class="text-blue-600 hover:underline">Edit</a> |
                         <a href="{% url 'mabar_delete' prepare.id %}" class="text-red-600 hover:underline">Hapus</a>
-                    </td>
                     {% endif %}
-                    {% if user.is_authenticated and record.id %}
-                    <td class="px-4 py-2 text-center">
-                        <a href="{% url 'mabar_update' record.id %}" class="text-blue-600 hover:underline">Edit</a> |
-                        <a href="{% url 'mabar_delete' record.id %}" class="text-red-600 hover:underline">Hapus</a>
-                    </td>
-                    {% endif %}
-                </td>
-                {% if user.is_authenticated and record.id %}
-                <td class="px-4 py-2 text-center">
-                    <a href="{% url 'mabar_update' record.id %}" class="text-blue-600 hover:underline">Edit</a> |
-                    <a href="{% url 'mabar_delete' record.id %}" class="text-red-600 hover:underline">Hapus</a>
                 </td>
                 {% endif %}
             </tr>
@@ -124,6 +110,9 @@
                 <th class="px-4 py-2 text-left text-xs font-semibold text-gray-700">Catatan</th>
                 <th class="px-4 py-2 text-left text-xs font-semibold text-gray-700">VVIP</th>
                 <th class="px-4 py-2 text-left text-xs font-semibold text-gray-700">Done</th>
+                {% if user.is_authenticated %}
+                <th class="px-4 py-2 text-center text-xs font-semibold text-gray-700">Aksi</th>
+                {% endif %}
             </tr>
         </thead>
         <tbody class="divide-y divide-gray-100">
@@ -174,6 +163,14 @@
                             <i class="ti ti-xbox-x-filled text-red-500"></i>
                         {% endif %}
                     </td>
+                    {% if user.is_authenticated %}
+                    <td class="px-4 py-2 text-center">
+                        {% if record.id %}
+                            <a href="{% url 'mabar_update' record.id %}" class="text-blue-600 hover:underline">Edit</a> |
+                            <a href="{% url 'mabar_delete' record.id %}" class="text-red-600 hover:underline">Hapus</a>
+                        {% endif %}
+                    </td>
+                    {% endif %}
                 </tr>
                 {% endif %}
             {% endfor %}
@@ -197,6 +194,9 @@
                 <th class="px-4 py-2 text-left text-xs font-semibold text-gray-700">Catatan</th>
                 <th class="px-4 py-2 text-left text-xs font-semibold text-gray-700">VVIP</th>
                 <th class="px-4 py-2 text-left text-xs font-semibold text-gray-700">Done</th>
+                {% if user.is_authenticated %}
+                <th class="px-4 py-2 text-center text-xs font-semibold text-gray-700">Aksi</th>
+                {% endif %}
             </tr>
         </thead>
         <tbody class="divide-y divide-gray-100">
@@ -247,6 +247,14 @@
                             <i class="ti ti-xbox-x-filled text-red-500"></i>
                         {% endif %}
                     </td>
+                    {% if user.is_authenticated %}
+                    <td class="px-4 py-2 text-center">
+                        {% if record.id %}
+                            <a href="{% url 'mabar_update' record.id %}" class="text-blue-600 hover:underline">Edit</a> |
+                            <a href="{% url 'mabar_delete' record.id %}" class="text-red-600 hover:underline">Hapus</a>
+                        {% endif %}
+                    </td>
+                    {% endif %}
                 </tr>
                 {% endif %}
             {% endfor %}
@@ -270,6 +278,9 @@
                 <th class="px-4 py-2 text-left text-xs font-semibold text-gray-700">Catatan</th>
                 <th class="px-4 py-2 text-left text-xs font-semibold text-gray-700">VVIP</th>
                 <th class="px-4 py-2 text-left text-xs font-semibold text-gray-700">Done</th>
+                {% if user.is_authenticated %}
+                <th class="px-4 py-2 text-center text-xs font-semibold text-gray-700">Aksi</th>
+                {% endif %}
             </tr>
         </thead>
         <tbody class="divide-y divide-gray-100">
@@ -284,12 +295,6 @@
                 <td class="px-4 py-2">
                     <span class="inline-block px-2 py-1 rounded bg-green-500 text-white text-xs font-semibold">Selesai</span>
                 </td>
-                {% if user.is_authenticated and record.id %}
-                <td class="px-4 py-2 text-center">
-                    <a href="{% url 'mabar_update' record.id %}" class="text-blue-600 hover:underline">Edit</a> |
-                    <a href="{% url 'mabar_delete' record.id %}" class="text-red-600 hover:underline">Hapus</a>
-                </td>
-                {% endif %}
                 <td class="px-4 py-2">{{ done.catatan }}</td>
                 <td class="px-4 py-2 text-center">
                     {% if done.is_vvip %}
@@ -300,22 +305,23 @@
                         <i class="ti ti-xbox-x-filled text-gray-400"></i>
                     {% endif %}
                 </td>
-                {% if user.is_authenticated and done.id %}
                 <td class="px-4 py-2 text-center">
-                    <a href="{% url 'mabar_update' done.id %}" class="text-blue-600 hover:underline">Edit</a> |
-                    <a href="{% url 'mabar_delete' done.id %}" class="text-red-600 hover:underline">Hapus</a>
+                    {% if done.is_done %}
+                        <span class="inline-block px-2 py-1 rounded bg-green-500 text-white text-xs font-semibold">Selesai</span>
+                        <i class="ti ti-circle-check-filled text-green-600"></i>
+                    {% else %}
+                        <span class="inline-block px-2 py-1 rounded bg-red-500 text-white text-xs font-semibold">Belum</span>
+                        <i class="ti ti-xbox-x-filled text-red-500"></i>
+                    {% endif %}
                 </td>
-                {% endif %}
-                    {% if user.is_authenticated and done.id %}
-                    <td class="px-4 py-2 text-center">
+                {% if user.is_authenticated %}
+                <td class="px-4 py-2 text-center">
+                    {% if done.id %}
                         <a href="{% url 'mabar_update' done.id %}" class="text-blue-600 hover:underline">Edit</a> |
                         <a href="{% url 'mabar_delete' done.id %}" class="text-red-600 hover:underline">Hapus</a>
-                    </td>
                     {% endif %}
-                <td class="px-4 py-2 text-center">
-                    <span class="inline-block px-2 py-1 rounded bg-green-500 text-white text-xs font-semibold">Selesai</span>
-                    <i class="ti ti-circle-check-filled text-green-600"></i>
                 </td>
+                {% endif %}
             </tr>
             {% endfor %}
         </tbody>

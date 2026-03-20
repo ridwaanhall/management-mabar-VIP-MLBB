@@ -11,80 +11,6 @@
     {% endif %}
 </div>
 
-<h2 class="text-xl font-semibold mb-2 mt-6">Request Hero Selesai</h2>
-<div class="overflow-x-auto neu-card p-4 mb-8">
-    <table class="min-w-full divide-y divide-gray-200 bg-transparent rounded-2xl shadow-none">
-        <thead class="bg-gray-50">
-            <tr>
-                <th class="px-4 py-3 text-left text-xs font-bold text-gray-700 whitespace-nowrap">Tanggal Dibuat</th>
-                <th class="px-4 py-3 text-left text-xs font-bold text-gray-700 whitespace-nowrap">Pendonasi</th>
-                <th class="px-4 py-3 text-left text-xs font-bold text-gray-700 whitespace-nowrap">Type Request</th>
-                <th class="px-4 py-3 text-left text-xs font-bold text-gray-700 whitespace-nowrap">Hero</th>
-                <th class="px-4 py-3 text-left text-xs font-bold text-gray-700 whitespace-nowrap">Type Lane</th>
-                <th class="px-4 py-3 text-left text-xs font-bold text-gray-700 whitespace-nowrap">Jumlah Request</th>
-                <th class="px-4 py-3 text-left text-xs font-bold text-gray-700 whitespace-nowrap">Sudah Selesai</th>
-                {% if user.is_authenticated %}
-                <th class="px-4 py-3 text-center text-xs font-bold text-gray-700 whitespace-nowrap">Aksi</th>
-                {% endif %}
-            </tr>
-        </thead>
-        <tbody>
-            {% for request in requests %}
-                {% if request.is_done %}
-                <tr class="even:bg-gray-50 hover:bg-blue-50 transition-colors duration-100 group">
-                    <td class="px-4 py-2">{{ request.date_created }}</td>
-                    <td class="px-4 py-2">{{ request.donate_name }}</td>
-                    <td class="px-4 py-2">
-                        {% if request.type_request == 'meta' %}
-                            <span class="neu-badge text-blue-700" title="Meta">Meta</span>
-                        {% elif request.type_request == 'non_meta' %}
-                            <span class="neu-badge text-gray-500" title="Non-Meta">Non-Meta</span>
-                        {% elif request.type_request == 'troll' %}
-                            <span class="neu-badge text-yellow-500" title="Troll">Troll</span>
-                        {% elif request.type_request == 'lain' %}
-                            <span class="neu-badge text-cyan-500" title="Lain-lain">Lain-lain</span>
-                        {% endif %}
-                    </td>
-                    <td class="px-4 py-2 text-center">
-                        <span class="neu-badge text-blue-700" title="{{ request.hero_name }}">{{ request.hero_name }}</span>
-                    </td>
-                    <td class="px-4 py-2">
-                        {% if request.type_lane == 'roam' %}
-                            <span class="neu-badge text-blue-700" title="Roam">Roam</span>
-                        {% elif request.type_lane == 'gold' %}
-                            <span class="neu-badge text-yellow-500" title="Gold">Gold</span>
-                        {% elif request.type_lane == 'jungle' %}
-                            <span class="neu-badge text-green-600" title="Jungle">Jungle</span>
-                        {% elif request.type_lane == 'mid' %}
-                            <span class="neu-badge text-cyan-500" title="Mid">Mid</span>
-                        {% elif request.type_lane == 'exp' %}
-                            <span class="neu-badge text-red-500" title="EXP">EXP</span>
-                        {% elif request.type_lane == 'bebas' %}
-                            <span class="neu-badge text-gray-500" title="Bebas">Bebas</span>
-                        {% endif %}
-                    </td>
-                    <td class="px-4 py-2">{{ request.count }}</td>
-                    <td class="px-4 py-2 text-center">
-                        <span class="neu-badge text-green-600" title="Selesai">Selesai</span>
-                    </td>
-                    <td class="px-4 py-2 text-center">
-                        {% if request.id %}
-                            <div class="flex flex-row gap-2 justify-center">
-                                <a href="{% url 'request_hero_detail' request.id %}" class="neu-btn px-3 py-1 text-xs text-gray-700 font-semibold">Detail</a>
-                                {% if user.is_authenticated %}
-                                    <a href="{% url 'request_hero_update' request.id %}" class="neu-btn px-3 py-1 text-xs text-blue-700 font-semibold">Edit</a>
-                                    <a href="{% url 'request_hero_delete' request.id %}" class="neu-btn px-3 py-1 text-xs text-red-600 font-semibold">Delete</a>
-                                {% endif %}
-                            </div>
-                        {% endif %}
-                    </td>
-                </tr>
-                {% endif %}
-            {% endfor %}
-        </tbody>
-    </table>
-</div>
-
 <h2 class="text-xl font-semibold mb-2 mt-6">Request Hero Belum Selesai</h2>
 <div class="overflow-x-auto neu-card p-4">
     <table class="min-w-full divide-y divide-gray-200 bg-transparent rounded-2xl shadow-none">
@@ -147,6 +73,78 @@
                         <a href="{% url 'request_hero_delete' request.id %}" class="text-red-600 hover:underline">Hapus</a>
                     </td>
                     {% endif %}
+                </tr>
+                {% endif %}
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<h2 class="text-xl font-semibold mb-2 mt-6">Request Hero Selesai</h2>
+<div class="overflow-x-auto neu-card p-4 mb-8">
+    <table class="min-w-full divide-y divide-gray-200 bg-transparent rounded-2xl shadow-none">
+        <thead class="bg-gray-50">
+            <tr>
+                <th class="px-4 py-3 text-left text-xs font-bold text-gray-700 whitespace-nowrap">Tanggal Dibuat</th>
+                <th class="px-4 py-3 text-left text-xs font-bold text-gray-700 whitespace-nowrap">Pendonasi</th>
+                <th class="px-4 py-3 text-left text-xs font-bold text-gray-700 whitespace-nowrap">Type Request</th>
+                <th class="px-4 py-3 text-left text-xs font-bold text-gray-700 whitespace-nowrap">Hero</th>
+                <th class="px-4 py-3 text-left text-xs font-bold text-gray-700 whitespace-nowrap">Type Lane</th>
+                <th class="px-4 py-3 text-left text-xs font-bold text-gray-700 whitespace-nowrap">Jumlah Request</th>
+                <th class="px-4 py-3 text-left text-xs font-bold text-gray-700 whitespace-nowrap">Sudah Selesai</th>
+                <th class="px-4 py-3 text-center text-xs font-bold text-gray-700 whitespace-nowrap">Aksi</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for request in requests %}
+                {% if request.is_done %}
+                <tr class="even:bg-gray-50 hover:bg-blue-50 transition-colors duration-100 group">
+                    <td class="px-4 py-2">{{ request.date_created }}</td>
+                    <td class="px-4 py-2">{{ request.donate_name }}</td>
+                    <td class="px-4 py-2">
+                        {% if request.type_request == 'meta' %}
+                            <span class="neu-badge text-blue-700" title="Meta">Meta</span>
+                        {% elif request.type_request == 'non_meta' %}
+                            <span class="neu-badge text-gray-500" title="Non-Meta">Non-Meta</span>
+                        {% elif request.type_request == 'troll' %}
+                            <span class="neu-badge text-yellow-500" title="Troll">Troll</span>
+                        {% elif request.type_request == 'lain' %}
+                            <span class="neu-badge text-cyan-500" title="Lain-lain">Lain-lain</span>
+                        {% endif %}
+                    </td>
+                    <td class="px-4 py-2 text-center">
+                        <span class="neu-badge text-blue-700" title="{{ request.hero_name }}">{{ request.hero_name }}</span>
+                    </td>
+                    <td class="px-4 py-2">
+                        {% if request.type_lane == 'roam' %}
+                            <span class="neu-badge text-blue-700" title="Roam">Roam</span>
+                        {% elif request.type_lane == 'gold' %}
+                            <span class="neu-badge text-yellow-500" title="Gold">Gold</span>
+                        {% elif request.type_lane == 'jungle' %}
+                            <span class="neu-badge text-green-600" title="Jungle">Jungle</span>
+                        {% elif request.type_lane == 'mid' %}
+                            <span class="neu-badge text-cyan-500" title="Mid">Mid</span>
+                        {% elif request.type_lane == 'exp' %}
+                            <span class="neu-badge text-red-500" title="EXP">EXP</span>
+                        {% elif request.type_lane == 'bebas' %}
+                            <span class="neu-badge text-gray-500" title="Bebas">Bebas</span>
+                        {% endif %}
+                    </td>
+                    <td class="px-4 py-2">{{ request.count }}</td>
+                    <td class="px-4 py-2 text-center">
+                        <span class="neu-badge text-green-600" title="Selesai">Selesai</span>
+                    </td>
+                    <td class="px-4 py-2 text-center">
+                        {% if request.id %}
+                            <div class="flex flex-row gap-2 justify-center">
+                                <a href="{% url 'request_hero_detail' request.id %}" class="neu-btn px-3 py-1 text-xs text-gray-700 font-semibold">Detail</a>
+                                {% if user.is_authenticated %}
+                                    <a href="{% url 'request_hero_update' request.id %}" class="neu-btn px-3 py-1 text-xs text-blue-700 font-semibold">Edit</a>
+                                    <a href="{% url 'request_hero_delete' request.id %}" class="neu-btn px-3 py-1 text-xs text-red-600 font-semibold">Delete</a>
+                                {% endif %}
+                            </div>
+                        {% endif %}
+                    </td>
                 </tr>
                 {% endif %}
             {% endfor %}

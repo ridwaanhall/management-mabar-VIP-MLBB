@@ -3,16 +3,18 @@
 
 {% block title %}Daftar Bonus Skin{% endblock %}
 
+
 {% block content %}
-<div class="flex justify-between items-center mb-8">
+<div class="flex justify-between items-center mb-8 neu-card p-6">
     <h1 class="text-3xl font-bold">Daftar Bonus Skin</h1>
     {% if user.is_authenticated %}
-        <a href="{% url 'bonus_skin_create' %}" class="bg-blue-600 text-white px-4 py-2 rounded">Tambah Bonus Skin</a>
+        <a href="{% url 'bonus_skin_create' %}" class="neu-btn px-6 py-2 text-blue-700 font-semibold">Tambah Bonus Skin</a>
     {% endif %}
 </div>
 
-<div class="overflow-x-auto">
-    <table class="min-w-full divide-y divide-gray-200 bg-white rounded-lg shadow">
+<h2 class="text-xl font-semibold mb-2 mt-6">Bonus Skin Belum Terkirim</h2>
+<div class="overflow-x-auto neu-card p-4 mb-8">
+    <table class="min-w-full divide-y divide-gray-200 bg-transparent rounded-2xl shadow-none">
         <thead class="bg-gray-50">
             <tr>
                 <th class="px-4 py-3 text-left text-xs font-bold text-gray-700 whitespace-nowrap">Tanggal Dibuat</th>
@@ -28,26 +30,73 @@
         </thead>
         <tbody>
             {% for skin in skins %}
-            <tr class="even:bg-gray-50 hover:bg-blue-50 transition-colors duration-100 group">
-                <td class="px-4 py-2">{{ skin.date_created|date:'Y-m-d H:i' }}</td>
-                <td class="px-4 py-2">{{ skin.mabar }}</td>
-                <td class="px-4 py-2 max-w-xs truncate" title="{{ skin.hero_digunakan }}">{{ skin.hero_digunakan }}</td>
-                <td class="px-4 py-2 max-w-xs truncate" title="{{ skin.skin_request }}">{{ skin.skin_request }}</td>
-                <td class="px-4 py-2 text-center">
-                    {% if skin.terkirim %}
-                        <span class="inline-flex items-center gap-1 px-2 py-1 rounded bg-green-500 text-white text-xs font-bold" title="Terkirim"><i class="ti ti-circle-check-filled text-white"></i> Ya</span>
-                    {% else %}
-                        <span class="inline-flex items-center gap-1 px-2 py-1 rounded bg-red-500 text-white text-xs font-bold" title="Belum Terkirim"><i class="ti ti-xbox-x-filled text-white"></i> Tidak</span>
+                {% if not skin.terkirim %}
+                <tr class="even:bg-gray-100 hover:bg-blue-100 transition-colors duration-100 group">
+                    <td class="px-4 py-2">{{ skin.date_created }}</td>
+                    <td class="px-4 py-2">{{ skin.mabar }}</td>
+                    <td class="px-4 py-2 text-center">
+                        <span class="neu-badge text-blue-700" title="{{ skin.hero_digunakan }}">{{ skin.hero_digunakan }}</span>
+                    </td>
+                    <td class="px-4 py-2 text-center">
+                        <span class="neu-badge text-cyan-500" title="{{ skin.skin_request }}">{{ skin.skin_request }}</span>
+                    </td>
+                    <td class="px-4 py-2 text-center">
+                        <span class="neu-badge text-red-500" title="Belum Terkirim">Belum</span>
+                    </td>
+                    <td class="px-4 py-2">{{ skin.date_terkirim }}</td>
+                    {% if user.is_authenticated and skin.id %}
+                    <td class="px-4 py-2 text-center">
+                        <a href="{% url 'bonus_skin_update' skin.id %}" class="text-blue-600 hover:underline">Edit</a> |
+                        <a href="{% url 'bonus_skin_delete' skin.id %}" class="text-red-600 hover:underline">Hapus</a>
+                    </td>
                     {% endif %}
-                </td>
-                <td class="px-4 py-2">{{ skin.date_terkirim|date:'Y-m-d H:i' }}</td>
-                {% if user.is_authenticated and skin.id %}
-                <td class="px-4 py-2 text-center">
-                    <a href="{% url 'bonus_skin_update' skin.id %}" class="text-blue-600 hover:underline">Edit</a> |
-                    <a href="{% url 'bonus_skin_delete' skin.id %}" class="text-red-600 hover:underline">Hapus</a>
-                </td>
+                </tr>
+                {% endif %}
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<h2 class="text-xl font-semibold mb-2 mt-6">Bonus Skin Terkirim</h2>
+<div class="overflow-x-auto neu-card p-4">
+    <table class="min-w-full divide-y divide-gray-200 bg-transparent rounded-2xl shadow-none">
+        <thead class="bg-gray-50">
+            <tr>
+                <th class="px-4 py-3 text-left text-xs font-bold text-gray-700 whitespace-nowrap">Tanggal Dibuat</th>
+                <th class="px-4 py-3 text-left text-xs font-bold text-gray-700 whitespace-nowrap">User</th>
+                <th class="px-4 py-3 text-left text-xs font-bold text-gray-700 whitespace-nowrap">Hero Digunakan</th>
+                <th class="px-4 py-3 text-left text-xs font-bold text-gray-700 whitespace-nowrap">Skin Request</th>
+                <th class="px-4 py-3 text-left text-xs font-bold text-gray-700 whitespace-nowrap">Terkirim</th>
+                <th class="px-4 py-3 text-left text-xs font-bold text-gray-700 whitespace-nowrap">Terkirim Pada</th>
+                {% if user.is_authenticated %}
+                <th class="px-4 py-3 text-center text-xs font-bold text-gray-700 whitespace-nowrap">Aksi</th>
                 {% endif %}
             </tr>
+        </thead>
+        <tbody>
+            {% for skin in skins %}
+                {% if skin.terkirim %}
+                <tr class="even:bg-gray-100 hover:bg-blue-100 transition-colors duration-100 group">
+                    <td class="px-4 py-2">{{ skin.date_created }}</td>
+                    <td class="px-4 py-2">{{ skin.mabar }}</td>
+                    <td class="px-4 py-2 text-center">
+                        <span class="neu-badge text-blue-700" title="{{ skin.hero_digunakan }}">{{ skin.hero_digunakan }}</span>
+                    </td>
+                    <td class="px-4 py-2 text-center">
+                        <span class="neu-badge text-cyan-500" title="{{ skin.skin_request }}">{{ skin.skin_request }}</span>
+                    </td>
+                    <td class="px-4 py-2 text-center">
+                        <span class="neu-badge text-green-600" title="Terkirim">Terkirim</span>
+                    </td>
+                    <td class="px-4 py-2">{{ skin.date_terkirim }}</td>
+                    {% if user.is_authenticated and skin.id %}
+                    <td class="px-4 py-2 text-center">
+                        <a href="{% url 'bonus_skin_update' skin.id %}" class="text-blue-600 hover:underline">Edit</a> |
+                        <a href="{% url 'bonus_skin_delete' skin.id %}" class="text-red-600 hover:underline">Hapus</a>
+                    </td>
+                    {% endif %}
+                </tr>
+                {% endif %}
             {% endfor %}
         </tbody>
     </table>

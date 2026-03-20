@@ -3,14 +3,14 @@
 {% block title %}Hapus Mabar{% endblock %}
 
 {% block content %}
-<div class="max-w-xl mx-auto mt-8">
+<div class="max-w-xl mx-auto mt-8 neu-card p-8">
     <h1 class="text-2xl font-bold mb-4">Konfirmasi Hapus Data Mabar</h1>
-    <form method="post" class="bg-white p-6 rounded shadow">
+    <form method="post">
         {% csrf_token %}
         <p>Apakah Anda yakin ingin menghapus data mabar <b>{{ mabar }}</b>?</p>
-        <div class="mt-4">
-            <button type="submit" class="bg-red-600 text-white px-4 py-2 rounded">Hapus</button>
-            <a href="{% url 'mabar_list' %}" class="ml-4 text-gray-600">Batal</a>
+        <div class="flex items-center gap-4 mt-4">
+            <button type="submit" class="neu-btn text-red-600 font-semibold px-6 py-2">Hapus</button>
+            <a href="{% url 'mabar_list' %}" class="neu-btn text-gray-600 font-semibold px-6 py-2">Batal</a>
         </div>
     </form>
 </div>

@@ -4,17 +4,17 @@
 
 {% block content %}
 
-<div class="flex justify-between items-center mb-8">
+<div class="flex justify-between items-center mb-8 neu-card p-6">
     <h1 class="text-3xl font-bold">Daftar Mabar</h1>
     {% if user.is_authenticated %}
-        <a href="{% url 'mabar_create' %}" class="bg-blue-600 text-white px-4 py-2 rounded">Tambah Mabar</a>
+        <a href="{% url 'mabar_create' %}" class="neu-btn px-6 py-2 text-blue-700 font-semibold">Tambah Mabar</a>
     {% endif %}
 </div>
 
 <h2 class="text-xl font-semibold mb-2 mt-6">Mabar Status: Persiapan</h2>
 <p class="mb-4 text-gray-600">Daftar mabar yang sedang dalam status <b>Persiapan</b>.</p>
-<div class="overflow-x-auto mb-8">
-    <table class="min-w-full divide-y divide-gray-200 bg-white rounded-lg shadow">
+<div class="overflow-x-auto mb-8 neu-card p-4">
+    <table class="min-w-full divide-y divide-gray-200 bg-transparent rounded-2xl shadow-none">
         <thead class="bg-gray-50">
             <tr>
                 <th class="px-4 py-3 text-left text-xs font-bold text-gray-700 whitespace-nowrap">Tanggal Dibuat</th>
@@ -22,9 +22,7 @@
                 <th class="px-4 py-3 text-left text-xs font-bold text-gray-700 whitespace-nowrap">Sisa Mabar</th>
                 <th class="px-4 py-3 text-left text-xs font-bold text-gray-700 whitespace-nowrap">Nickname</th>
                 <th class="px-4 py-3 text-left text-xs font-bold text-gray-700 whitespace-nowrap">ID</th>
-                <th class="px-4 py-3 text-left text-xs font-bold text-gray-700 whitespace-nowrap">Zone</th>
                 <th class="px-4 py-3 text-left text-xs font-bold text-gray-700 whitespace-nowrap">Status</th>
-                <th class="px-4 py-3 text-left text-xs font-bold text-gray-700 whitespace-nowrap">Catatan</th>
                 <th class="px-4 py-3 text-left text-xs font-bold text-gray-700 whitespace-nowrap">VVIP</th>
                 <th class="px-4 py-3 text-left text-xs font-bold text-gray-700 whitespace-nowrap">Done</th>
                 {% if user.is_authenticated %}
@@ -34,45 +32,45 @@
         </thead>
         <tbody>
             {% for prepare in prepare_records %}
-            <tr class="even:bg-gray-50 hover:bg-blue-50 transition-colors duration-100 group">
+            <tr class="even:bg-gray-100 hover:bg-blue-100 transition-colors duration-100 group">
                 <td class="px-4 py-2">{{ prepare.date_created }}</td>
                 <td class="px-4 py-2">{{ prepare.donate_name }}</td>
                 <td class="px-4 py-2">{{ prepare.sisa_mabar }}</td>
                 <td class="px-4 py-2">{{ prepare.nickname }}</td>
                 <td class="px-4 py-2">{{ prepare.id_user }}</td>
-                <td class="px-4 py-2">{{ prepare.zone_user }}</td>
+                <!-- zone removed -->
                 <td class="px-4 py-2">
                     {% if prepare.status == 'done' %}
-                        <span class="inline-block px-2 py-1 rounded bg-green-500 text-white text-xs font-semibold">Selesai</span>
+                        <span class="neu-badge text-green-600" title="Selesai">Selesai</span>
                     {% elif prepare.status == 'antri' %}
-                        <span class="inline-block px-2 py-1 rounded bg-orange-400 text-white text-xs font-semibold">Antri Mabar</span>
+                        <span class="neu-badge text-orange-500" title="Antri Mabar">Antri Mabar</span>
                     {% elif prepare.status == 'antri_scrim' %}
-                        <span class="inline-block px-2 py-1 rounded bg-cyan-400 text-black text-xs font-semibold">Antri Scrim</span>
+                        <span class="neu-badge text-cyan-500" title="Antri Scrim">Antri Scrim</span>
                     {% elif prepare.status == 'prepare' %}
-                        <span class="inline-block px-2 py-1 rounded bg-blue-500 text-white text-xs font-semibold">Persiapan</span>
+                        <span class="neu-badge text-blue-700" title="Persiapan">Persiapan</span>
                     {% elif prepare.status == 'in_mabar' %}
-                        <span class="inline-block px-2 py-1 rounded bg-green-200 text-black text-xs font-semibold">Sedang Mabar</span>
+                        <span class="neu-badge text-green-400" title="Sedang Mabar">Sedang Mabar</span>
                     {% elif prepare.status == 'salah_id' %}
-                        <span class="inline-block px-2 py-1 rounded bg-red-500 text-white text-xs font-semibold">Salah ID User</span>
+                        <span class="neu-badge text-red-600" title="Salah ID User">Salah ID User</span>
                     {% elif prepare.status == 'kurang' %}
-                        <span class="inline-block px-2 py-1 rounded bg-red-400 text-white text-xs font-semibold">Donasi Kurang</span>
+                        <span class="neu-badge text-red-400" title="Donasi Kurang">Donasi Kurang</span>
                     {% else %}
-                        <span class="inline-block px-2 py-1 rounded bg-gray-400 text-white text-xs font-semibold">{{ prepare.status }}</span>
+                        <span class="neu-badge text-gray-500" title="{{ prepare.status }}">{{ prepare.status }}</span>
                     {% endif %}
                 </td>
-                <td class="px-4 py-2 max-w-xs truncate" title="{{ prepare.catatan }}">{{ prepare.catatan }}</td>
+                <!-- catatan removed -->
                 <td class="px-4 py-2 text-center">
                     {% if prepare.is_vvip %}
-                        <span class="inline-flex items-center gap-1 px-2 py-1 rounded bg-blue-500 text-white text-xs font-bold" title="VVIP">VVIP <i class="ti ti-circle-check-filled text-white"></i></span>
+                        <span class="neu-badge text-blue-700" title="VVIP">VVIP <i class="ti ti-circle-check-filled text-blue-700"></i></span>
                     {% else %}
-                        <span class="inline-flex items-center gap-1 px-2 py-1 rounded bg-gray-400 text-white text-xs font-semibold" title="Biasa">Biasa <i class="ti ti-xbox-x-filled text-white"></i></span>
+                        <span class="neu-badge text-gray-500" title="Biasa">Biasa <i class="ti ti-xbox-x-filled text-gray-500"></i></span>
                     {% endif %}
                 </td>
                 <td class="px-4 py-2 text-center">
                     {% if prepare.is_done %}
-                        <span class="inline-flex items-center gap-1 px-2 py-1 rounded bg-green-500 text-white text-xs font-bold" title="Selesai">Selesai <i class="ti ti-circle-check-filled text-white"></i></span>
+                        <span class="neu-badge text-green-600" title="Selesai">Selesai <i class="ti ti-circle-check-filled text-green-600"></i></span>
                     {% else %}
-                        <span class="inline-flex items-center gap-1 px-2 py-1 rounded bg-red-500 text-white text-xs font-bold" title="Belum">Belum <i class="ti ti-xbox-x-filled text-white"></i></span>
+                        <span class="neu-badge text-red-500" title="Belum">Belum <i class="ti ti-xbox-x-filled text-red-500"></i></span>
                     {% endif %}
                 </td>
                 {% if user.is_authenticated %}
@@ -92,18 +90,16 @@
 
 <h2 class="text-xl font-semibold mb-2 mt-6">Mabar Status: Aktif & Belum Selesai (VVIP)</h2>
 <p class="mb-4 text-gray-600">Daftar mabar <b>VVIP</b> yang belum selesai (kecuali status Persiapan dan Selesai).</p>
-<div class="overflow-x-auto mb-8">
-    <table class="min-w-full divide-y divide-gray-200 bg-white rounded-lg shadow">
-        <thead class="bg-gray-100">
+<div class="overflow-x-auto mb-8 neu-card p-4">
+    <table class="min-w-full divide-y divide-gray-200 bg-transparent rounded-2xl shadow-none">
+        <thead class="bg-gray-50">
             <tr>
                 <th class="px-4 py-2 text-left text-xs font-semibold text-gray-700">Tanggal Dibuat</th>
                 <th class="px-4 py-2 text-left text-xs font-semibold text-gray-700">Pendonasi</th>
                 <th class="px-4 py-2 text-left text-xs font-semibold text-gray-700">Sisa Mabar</th>
                 <th class="px-4 py-2 text-left text-xs font-semibold text-gray-700">Nickname</th>
                 <th class="px-4 py-2 text-left text-xs font-semibold text-gray-700">ID</th>
-                <th class="px-4 py-2 text-left text-xs font-semibold text-gray-700">Zone</th>
                 <th class="px-4 py-2 text-left text-xs font-semibold text-gray-700">Status</th>
-                <th class="px-4 py-2 text-left text-xs font-semibold text-gray-700">Catatan</th>
                 <th class="px-4 py-2 text-left text-xs font-semibold text-gray-700">VVIP</th>
                 <th class="px-4 py-2 text-left text-xs font-semibold text-gray-700">Done</th>
                 {% if user.is_authenticated %}
@@ -111,52 +107,48 @@
                 {% endif %}
             </tr>
         </thead>
-        <tbody class="divide-y divide-gray-100">
+        <tbody>
             {% for record in records_except_done %}
                 {% if record.is_vvip %}
-                <tr class="hover:bg-gray-50">
+                <tr class="even:bg-gray-100 hover:bg-blue-100 transition-colors duration-100 group">
                     <td class="px-4 py-2">{{ record.date_created }}</td>
                     <td class="px-4 py-2">{{ record.donate_name }}</td>
                     <td class="px-4 py-2">{{ record.sisa_mabar }}</td>
                     <td class="px-4 py-2">{{ record.nickname }}</td>
                     <td class="px-4 py-2">{{ record.id_user }}</td>
-                    <td class="px-4 py-2">{{ record.zone_user }}</td>
+                    <!-- zone removed -->
                     <td class="px-4 py-2">
                         {% if record.status == 'done' %}
-                            <span class="inline-block px-2 py-1 rounded bg-green-500 text-white text-xs font-semibold">Selesai</span>
+                            <span class="neu-badge text-green-600" title="Selesai">Selesai</span>
                         {% elif record.status == 'antri' %}
-                            <span class="inline-block px-2 py-1 rounded bg-orange-400 text-white text-xs font-semibold">Antri Mabar</span>
+                            <span class="neu-badge text-orange-500" title="Antri Mabar">Antri Mabar</span>
                         {% elif record.status == 'antri_scrim' %}
-                            <span class="inline-block px-2 py-1 rounded bg-cyan-400 text-black text-xs font-semibold">Antri Scrim</span>
+                            <span class="neu-badge text-cyan-500" title="Antri Scrim">Antri Scrim</span>
                         {% elif record.status == 'prepare' %}
-                            <span class="inline-block px-2 py-1 rounded bg-blue-500 text-white text-xs font-semibold">Persiapan</span>
+                            <span class="neu-badge text-blue-700" title="Persiapan">Persiapan</span>
                         {% elif record.status == 'in_mabar' %}
-                            <span class="inline-block px-2 py-1 rounded bg-green-200 text-black text-xs font-semibold">Sedang Mabar</span>
+                            <span class="neu-badge text-green-400" title="Sedang Mabar">Sedang Mabar</span>
                         {% elif record.status == 'salah_id' %}
-                            <span class="inline-block px-2 py-1 rounded bg-red-500 text-white text-xs font-semibold">Salah ID User</span>
+                            <span class="neu-badge text-red-600" title="Salah ID User">Salah ID User</span>
                         {% elif record.status == 'kurang' %}
-                            <span class="inline-block px-2 py-1 rounded bg-red-400 text-white text-xs font-semibold">Donasi Kurang</span>
+                            <span class="neu-badge text-red-400" title="Donasi Kurang">Donasi Kurang</span>
                         {% else %}
-                            <span class="inline-block px-2 py-1 rounded bg-gray-400 text-white text-xs font-semibold">{{ record.status }}</span>
+                            <span class="neu-badge text-gray-500" title="{{ record.status }}">{{ record.status }}</span>
                         {% endif %}
                     </td>
-                    <td class="px-4 py-2">{{ record.catatan }}</td>
+                    <!-- catatan removed -->
                     <td class="px-4 py-2 text-center">
                         {% if record.is_vvip %}
-                            <span class="inline-block px-2 py-1 rounded bg-blue-500 text-white text-xs font-semibold">VVIP</span>
-                            <i class="ti ti-circle-check-filled text-blue-600"></i>
+                            <span class="neu-badge text-blue-700" title="VVIP">VVIP <i class="ti ti-circle-check-filled text-blue-700"></i></span>
                         {% else %}
-                            <span class="inline-block px-2 py-1 rounded bg-gray-400 text-white text-xs font-semibold">Biasa</span>
-                            <i class="ti ti-xbox-x-filled text-gray-400"></i>
+                            <span class="neu-badge text-gray-500" title="Biasa">Biasa <i class="ti ti-xbox-x-filled text-gray-500"></i></span>
                         {% endif %}
                     </td>
                     <td class="px-4 py-2 text-center">
                         {% if record.is_done %}
-                            <span class="inline-block px-2 py-1 rounded bg-green-500 text-white text-xs font-semibold">Selesai</span>
-                            <i class="ti ti-circle-check-filled text-green-600"></i>
+                            <span class="neu-badge text-green-600" title="Selesai">Selesai <i class="ti ti-circle-check-filled text-green-600"></i></span>
                         {% else %}
-                            <span class="inline-block px-2 py-1 rounded bg-red-500 text-white text-xs font-semibold">Belum</span>
-                            <i class="ti ti-xbox-x-filled text-red-500"></i>
+                            <span class="neu-badge text-red-500" title="Belum">Belum <i class="ti ti-xbox-x-filled text-red-500"></i></span>
                         {% endif %}
                     </td>
                     {% if user.is_authenticated %}
@@ -176,18 +168,16 @@
 
 <h2 class="text-xl font-semibold mb-2 mt-6">Mabar Status: Aktif & Belum Selesai (Non-VVIP)</h2>
 <p class="mb-4 text-gray-600">Daftar mabar <b>Biasa</b> (bukan VVIP) yang belum selesai (kecuali status Persiapan dan Selesai).</p>
-<div class="overflow-x-auto mb-8">
-    <table class="min-w-full divide-y divide-gray-200 bg-white rounded-lg shadow">
-        <thead class="bg-gray-100">
+<div class="overflow-x-auto mb-8 neu-card p-4">
+    <table class="min-w-full divide-y divide-gray-200 bg-transparent rounded-2xl shadow-none">
+        <thead class="bg-gray-50">
             <tr>
                 <th class="px-4 py-2 text-left text-xs font-semibold text-gray-700">Tanggal Dibuat</th>
                 <th class="px-4 py-2 text-left text-xs font-semibold text-gray-700">Pendonasi</th>
                 <th class="px-4 py-2 text-left text-xs font-semibold text-gray-700">Sisa Mabar</th>
                 <th class="px-4 py-2 text-left text-xs font-semibold text-gray-700">Nickname</th>
                 <th class="px-4 py-2 text-left text-xs font-semibold text-gray-700">ID</th>
-                <th class="px-4 py-2 text-left text-xs font-semibold text-gray-700">Zone</th>
                 <th class="px-4 py-2 text-left text-xs font-semibold text-gray-700">Status</th>
-                <th class="px-4 py-2 text-left text-xs font-semibold text-gray-700">Catatan</th>
                 <th class="px-4 py-2 text-left text-xs font-semibold text-gray-700">VVIP</th>
                 <th class="px-4 py-2 text-left text-xs font-semibold text-gray-700">Done</th>
                 {% if user.is_authenticated %}
@@ -195,52 +185,48 @@
                 {% endif %}
             </tr>
         </thead>
-        <tbody class="divide-y divide-gray-100">
+        <tbody>
             {% for record in records_except_done %}
                 {% if not record.is_vvip %}
-                <tr class="hover:bg-gray-50">
+                <tr class="even:bg-gray-100 hover:bg-blue-100 transition-colors duration-100 group">
                     <td class="px-4 py-2">{{ record.date_created }}</td>
                     <td class="px-4 py-2">{{ record.donate_name }}</td>
                     <td class="px-4 py-2">{{ record.sisa_mabar }}</td>
                     <td class="px-4 py-2">{{ record.nickname }}</td>
                     <td class="px-4 py-2">{{ record.id_user }}</td>
-                    <td class="px-4 py-2">{{ record.zone_user }}</td>
+                    <!-- zone removed -->
                     <td class="px-4 py-2">
                         {% if record.status == 'done' %}
-                            <span class="inline-block px-2 py-1 rounded bg-green-500 text-white text-xs font-semibold">Selesai</span>
+                            <span class="neu-badge text-green-600" title="Selesai">Selesai</span>
                         {% elif record.status == 'antri' %}
-                            <span class="inline-block px-2 py-1 rounded bg-orange-400 text-white text-xs font-semibold">Antri Mabar</span>
+                            <span class="neu-badge text-orange-500" title="Antri Mabar">Antri Mabar</span>
                         {% elif record.status == 'antri_scrim' %}
-                            <span class="inline-block px-2 py-1 rounded bg-cyan-400 text-black text-xs font-semibold">Antri Scrim</span>
+                            <span class="neu-badge text-cyan-500" title="Antri Scrim">Antri Scrim</span>
                         {% elif record.status == 'prepare' %}
-                            <span class="inline-block px-2 py-1 rounded bg-blue-500 text-white text-xs font-semibold">Persiapan</span>
+                            <span class="neu-badge text-blue-700" title="Persiapan">Persiapan</span>
                         {% elif record.status == 'in_mabar' %}
-                            <span class="inline-block px-2 py-1 rounded bg-green-200 text-black text-xs font-semibold">Sedang Mabar</span>
+                            <span class="neu-badge text-green-400" title="Sedang Mabar">Sedang Mabar</span>
                         {% elif record.status == 'salah_id' %}
-                            <span class="inline-block px-2 py-1 rounded bg-red-500 text-white text-xs font-semibold">Salah ID User</span>
+                            <span class="neu-badge text-red-600" title="Salah ID User">Salah ID User</span>
                         {% elif record.status == 'kurang' %}
-                            <span class="inline-block px-2 py-1 rounded bg-red-400 text-white text-xs font-semibold">Donasi Kurang</span>
+                            <span class="neu-badge text-red-400" title="Donasi Kurang">Donasi Kurang</span>
                         {% else %}
-                            <span class="inline-block px-2 py-1 rounded bg-gray-400 text-white text-xs font-semibold">{{ record.status }}</span>
+                            <span class="neu-badge text-gray-500" title="{{ record.status }}">{{ record.status }}</span>
                         {% endif %}
                     </td>
-                    <td class="px-4 py-2">{{ record.catatan }}</td>
+                    <!-- catatan removed -->
                     <td class="px-4 py-2 text-center">
                         {% if record.is_vvip %}
-                            <span class="inline-block px-2 py-1 rounded bg-blue-500 text-white text-xs font-semibold">VVIP</span>
-                            <i class="ti ti-circle-check-filled text-blue-600"></i>
+                            <span class="neu-badge text-blue-700" title="VVIP">VVIP <i class="ti ti-circle-check-filled text-blue-700"></i></span>
                         {% else %}
-                            <span class="inline-block px-2 py-1 rounded bg-gray-400 text-white text-xs font-semibold">Biasa</span>
-                            <i class="ti ti-xbox-x-filled text-gray-400"></i>
+                            <span class="neu-badge text-gray-500" title="Biasa">Biasa <i class="ti ti-xbox-x-filled text-gray-500"></i></span>
                         {% endif %}
                     </td>
                     <td class="px-4 py-2 text-center">
                         {% if record.is_done %}
-                            <span class="inline-block px-2 py-1 rounded bg-green-500 text-white text-xs font-semibold">Selesai</span>
-                            <i class="ti ti-circle-check-filled text-green-600"></i>
+                            <span class="neu-badge text-green-600" title="Selesai">Selesai <i class="ti ti-circle-check-filled text-green-600"></i></span>
                         {% else %}
-                            <span class="inline-block px-2 py-1 rounded bg-red-500 text-white text-xs font-semibold">Belum</span>
-                            <i class="ti ti-xbox-x-filled text-red-500"></i>
+                            <span class="neu-badge text-red-500" title="Belum">Belum <i class="ti ti-xbox-x-filled text-red-500"></i></span>
                         {% endif %}
                     </td>
                     {% if user.is_authenticated %}
@@ -260,18 +246,16 @@
 
 <h2 class="text-xl font-semibold mb-2 mt-6">Mabar Status: Selesai</h2>
 <p class="mb-4 text-gray-600">Daftar mabar yang sudah <b>selesai</b>.</p>
-<div class="overflow-x-auto">
-    <table class="min-w-full divide-y divide-gray-200 bg-white rounded-lg shadow">
-        <thead class="bg-gray-100">
+<div class="overflow-x-auto neu-card p-4">
+    <table class="min-w-full divide-y divide-gray-200 bg-transparent rounded-2xl shadow-none">
+        <thead class="bg-gray-50">
             <tr>
                 <th class="px-4 py-2 text-left text-xs font-semibold text-gray-700">Tanggal Dibuat</th>
                 <th class="px-4 py-2 text-left text-xs font-semibold text-gray-700">Pendonasi</th>
                 <th class="px-4 py-2 text-left text-xs font-semibold text-gray-700">Sisa Mabar</th>
                 <th class="px-4 py-2 text-left text-xs font-semibold text-gray-700">Nickname</th>
                 <th class="px-4 py-2 text-left text-xs font-semibold text-gray-700">ID</th>
-                <th class="px-4 py-2 text-left text-xs font-semibold text-gray-700">Zone</th>
                 <th class="px-4 py-2 text-left text-xs font-semibold text-gray-700">Status</th>
-                <th class="px-4 py-2 text-left text-xs font-semibold text-gray-700">Catatan</th>
                 <th class="px-4 py-2 text-left text-xs font-semibold text-gray-700">VVIP</th>
                 <th class="px-4 py-2 text-left text-xs font-semibold text-gray-700">Done</th>
                 {% if user.is_authenticated %}
@@ -279,35 +263,31 @@
                 {% endif %}
             </tr>
         </thead>
-        <tbody class="divide-y divide-gray-100">
+        <tbody>
             {% for done in done_records %}
-            <tr class="hover:bg-gray-50">
+            <tr class="even:bg-gray-100 hover:bg-blue-100 transition-colors duration-100 group">
                 <td class="px-4 py-2">{{ done.date_created }}</td>
                 <td class="px-4 py-2">{{ done.donate_name }}</td>
                 <td class="px-4 py-2">{{ done.sisa_mabar }}</td>
                 <td class="px-4 py-2">{{ done.nickname }}</td>
                 <td class="px-4 py-2">{{ done.id_user }}</td>
-                <td class="px-4 py-2">{{ done.zone_user }}</td>
+                <!-- zone removed -->
                 <td class="px-4 py-2">
-                    <span class="inline-block px-2 py-1 rounded bg-green-500 text-white text-xs font-semibold">Selesai</span>
+                    <span class="neu-badge text-green-600" title="Selesai">Selesai</span>
                 </td>
-                <td class="px-4 py-2">{{ done.catatan }}</td>
+                <!-- catatan removed -->
                 <td class="px-4 py-2 text-center">
                     {% if done.is_vvip %}
-                        <span class="inline-block px-2 py-1 rounded bg-blue-500 text-white text-xs font-semibold">VVIP</span>
-                        <i class="ti ti-circle-check-filled text-blue-600"></i>
+                        <span class="neu-badge text-blue-700" title="VVIP">VVIP <i class="ti ti-circle-check-filled text-blue-700"></i></span>
                     {% else %}
-                        <span class="inline-block px-2 py-1 rounded bg-gray-400 text-white text-xs font-semibold">Biasa</span>
-                        <i class="ti ti-xbox-x-filled text-gray-400"></i>
+                        <span class="neu-badge text-gray-500" title="Biasa">Biasa <i class="ti ti-xbox-x-filled text-gray-500"></i></span>
                     {% endif %}
                 </td>
                 <td class="px-4 py-2 text-center">
                     {% if done.is_done %}
-                        <span class="inline-block px-2 py-1 rounded bg-green-500 text-white text-xs font-semibold">Selesai</span>
-                        <i class="ti ti-circle-check-filled text-green-600"></i>
+                        <span class="neu-badge text-green-600" title="Selesai">Selesai <i class="ti ti-circle-check-filled text-green-600"></i></span>
                     {% else %}
-                        <span class="inline-block px-2 py-1 rounded bg-red-500 text-white text-xs font-semibold">Belum</span>
-                        <i class="ti ti-xbox-x-filled text-red-500"></i>
+                        <span class="neu-badge text-red-500" title="Belum">Belum <i class="ti ti-xbox-x-filled text-red-500"></i></span>
                     {% endif %}
                 </td>
                 {% if user.is_authenticated %}

@@ -6,25 +6,60 @@
     <title>{% block title %}Website Mabar{% endblock %}</title>
 
 
-    <!-- Tailwind CSS via CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <!-- Tabler Icon -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
+        <!-- Tailwind CSS via CDN -->
+        <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+        <!-- Tabler Icon -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
+        <style>
+            body {
+                background: #e0e5ec;
+            }
+            .neu-card {
+                background: #e0e5ec;
+                border-radius: 1.5rem;
+                box-shadow: 8px 8px 24px #b8bac0, -8px -8px 24px #ffffff;
+            }
+            .neu-inset {
+                box-shadow: inset 4px 4px 12px #b8bac0, inset -4px -4px 12px #ffffff;
+            }
+            .neu-btn {
+                background: #e0e5ec;
+                border-radius: 1rem;
+                box-shadow: 4px 4px 12px #b8bac0, -4px -4px 12px #ffffff;
+                transition: box-shadow 0.2s;
+            }
+            .neu-btn:active {
+                box-shadow: inset 2px 2px 6px #b8bac0, inset -2px -2px 6px #ffffff;
+            }
+            .neu-input {
+                background: #e0e5ec;
+                border-radius: 0.75rem;
+                box-shadow: inset 2px 2px 6px #b8bac0, inset -2px -2px 6px #ffffff;
+                border: none;
+            }
+            .neu-badge {
+                background: #e0e5ec;
+                border-radius: 0.75rem;
+                box-shadow: 2px 2px 6px #b8bac0, -2px -2px 6px #ffffff;
+                padding: 0.25rem 0.75rem;
+                font-weight: 600;
+            }
+        </style>
 
 </head>
 <body>
 
 
 <!-- Navbar -->
-<nav class="bg-gray-900 text-white">
+<nav class="neu-card p-2 mb-4">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex items-center justify-between h-16">
             <div class="flex items-center">
-                <a class="text-xl font-bold" href="{% url 'mabar_list' %}">Website Mabar</a>
+                <a class="text-xl font-bold text-blue-700 neu-btn px-4 py-2" href="{% url 'mabar_list' %}">Website Mabar</a>
                 <div class="ml-10 flex items-baseline space-x-4">
-                    <a class="px-3 py-2 rounded-md text-sm font-medium {% if request.resolver_match.url_name == 'mabar_list' %}bg-gray-800{% endif %}" href="{% url 'mabar_list' %}">Daftar Mabar</a>
-                    <a class="px-3 py-2 rounded-md text-sm font-medium {% if request.resolver_match.url_name == 'bonus_skin_list' %}bg-gray-800{% endif %}" href="{% url 'bonus_skin_list' %}">Daftar Bonus Skin</a>
-                    <a class="px-3 py-2 rounded-md text-sm font-medium {% if request.resolver_match.url_name == 'request_hero_list' %}bg-gray-800{% endif %}" href="{% url 'request_hero_list' %}">Daftar Request Hero</a>
+                    <a class="neu-btn px-3 py-2 text-sm font-medium {% if request.resolver_match.url_name == 'mabar_list' %}ring-2 ring-blue-400{% endif %}" href="{% url 'mabar_list' %}">Daftar Mabar</a>
+                    <a class="neu-btn px-3 py-2 text-sm font-medium {% if request.resolver_match.url_name == 'bonus_skin_list' %}ring-2 ring-blue-400{% endif %}" href="{% url 'bonus_skin_list' %}">Daftar Bonus Skin</a>
+                    <a class="neu-btn px-3 py-2 text-sm font-medium {% if request.resolver_match.url_name == 'request_hero_list' %}ring-2 ring-blue-400{% endif %}" href="{% url 'request_hero_list' %}">Daftar Request Hero</a>
                 </div>
             </div>
         </div>
@@ -38,10 +73,10 @@
 </div>
 
 <!-- Footer -->
-<footer class="bg-gray-900 text-white mt-12 py-6">
+<footer class="neu-card mt-12 py-6">
     <div class="max-w-7xl mx-auto px-4 text-center">
-        <p class="text-sm">&copy; {{ now|default:2026 }} Management Mabar VIP MLBB. All rights reserved.</p>
-        <p class="text-xs mt-1">Powered by Django & Tailwind CSS</p>
+        <p class="text-sm text-blue-700">&copy; {{ now|default:2026 }} Management Mabar VIP MLBB. All rights reserved.</p>
+        <p class="text-xs mt-1 text-gray-500">Powered by Django & Tailwind CSS</p>
     </div>
 </footer>
 </body>

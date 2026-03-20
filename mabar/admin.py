@@ -67,7 +67,7 @@ class MabarAdmin(admin.ModelAdmin):
             'kurang': 'red',
             'done': 'green',
         }.get(obj.status, 'black')
-        return format_html(f'<span style="color: {color};">{obj.get_status_display()}</span>')
+        return format_html('<span style="color: {}">{}</span>', color, obj.get_status_display())
     
     colored_status.short_description = 'Status'
 

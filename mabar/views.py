@@ -1,3 +1,26 @@
+# Detail views for non-logged-in users
+from django import forms
+
+def mabar_detail(request, pk):
+    mabar = get_object_or_404(Mabar, pk=pk)
+    form = MabarForm(instance=mabar)
+    for field in form.fields:
+        form.fields[field].widget.attrs['disabled'] = True
+    return render(request, 'public/mabar_detail.html', {'form': form})
+
+def bonus_skin_detail(request, pk):
+    skin = get_object_or_404(BonusSkin, pk=pk)
+    form = BonusSkinForm(instance=skin)
+    for field in form.fields:
+        form.fields[field].widget.attrs['disabled'] = True
+    return render(request, 'public/bonus_skin_detail.html', {'form': form})
+
+def request_hero_detail(request, pk):
+    req = get_object_or_404(RequestHero, pk=pk)
+    form = RequestHeroForm(instance=req)
+    for field in form.fields:
+        form.fields[field].widget.attrs['disabled'] = True
+    return render(request, 'public/request_hero_detail.html', {'form': form})
 
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required

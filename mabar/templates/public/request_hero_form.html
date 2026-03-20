@@ -12,7 +12,10 @@
             <label for="{{ field.id_for_label }}" class="block text-sm font-semibold text-gray-700 mb-1">{{ field.label }}{% if field.field.required %}<span class="text-red-500">*</span>{% endif %}</label>
             {% if field.field.widget.input_type == 'checkbox' %}
                 <div class="flex items-center gap-2">
-                    <input type="checkbox" name="{{ field.html_name }}" id="{{ field.id_for_label }}" {% if field.value %}checked{% endif %} class="neu-checkbox w-5 h-5" {% if field.field.required %}required{% endif %}>
+                    <label class="switch">
+                        <input type="checkbox" name="{{ field.html_name }}" id="{{ field.id_for_label }}" {% if field.value %}checked{% endif %} {% if field.field.required %}required{% endif %}>
+                        <span class="slider"></span>
+                    </label>
                     <span class="text-sm text-gray-700">{{ field.label }}</span>
                 </div>
                 {% elif field.field.widget.input_type == 'select' or field.field.widget.input_type == 'select-multiple' %}

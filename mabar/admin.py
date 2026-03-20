@@ -48,7 +48,7 @@ class DateRangeFilter(admin.SimpleListFilter):
 
 @admin.register(Mabar)
 class MabarAdmin(admin.ModelAdmin):
-    list_display = ['date_created', 'donate_name', 'jumlah_game', 'telah_digunakan', 'nickname', 'id_user', 'zone_user', 'colored_status', 'catatan', 'is_vvip', 'is_done']
+    list_display = ['date_created', 'donate_name', 'sisa_mabar', 'nickname', 'id_user', 'zone_user', 'colored_status', 'catatan', 'is_vvip', 'is_done']
     list_filter = ['status', 'is_vvip', 'is_done', 'date_created', DateRangeFilter]
     search_fields = ['donate_name', 'id_user']
     readonly_fields = ['date_created']

@@ -32,13 +32,9 @@ class Mabar(models.Model):
         null=True, 
         verbose_name="Zone"
     )
-    jumlah_game = models.IntegerField(
-        default=1, 
-        verbose_name="Jumlah"
-    )
-    telah_digunakan = models.IntegerField(
-        default=0, 
-        verbose_name="Digunakan"
+    sisa_mabar = models.IntegerField(
+        default=1,
+        verbose_name="Sisa Mabar"
     )
     catatan = models.TextField(
         default="Pantau Status mabarmu!",

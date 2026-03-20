@@ -3,7 +3,12 @@
 {% block title %}Daftar Request Hero{% endblock %}
 
 {% block content %}
-<h1 class="text-3xl font-bold text-center mb-8">Daftar Request Hero</h1>
+<div class="flex justify-between items-center mb-8">
+    <h1 class="text-3xl font-bold">Daftar Request Hero</h1>
+    {% if user.is_authenticated %}
+        <a href="{% url 'request_hero_create' %}" class="bg-blue-600 text-white px-4 py-2 rounded">Tambah Request Hero</a>
+    {% endif %}
+</div>
 
 <div class="overflow-x-auto">
     <table class="min-w-full divide-y divide-gray-200 bg-white rounded-lg shadow">
@@ -17,6 +22,9 @@
                 <th class="px-4 py-2 text-left text-xs font-semibold text-gray-700">Jumlah Request</th>
                 <th class="px-4 py-2 text-left text-xs font-semibold text-gray-700">Sudah Selesai</th>
                 <th class="px-4 py-2 text-left text-xs font-semibold text-gray-700">Catatan</th>
+                {% if user.is_authenticated %}
+                <th class="px-4 py-2 text-center text-xs font-semibold text-gray-700">Aksi</th>
+                {% endif %}
             </tr>
         </thead>
         <tbody class="divide-y divide-gray-100">
@@ -60,6 +68,12 @@
                     {% endif %}
                 </td>
                 <td class="px-4 py-2">{{ request.catatan }}</td>
+                {% if user.is_authenticated and request.id %}
+                <td class="px-4 py-2 text-center">
+                    <a href="{% url 'request_hero_update' request.id %}" class="text-blue-600 hover:underline">Edit</a> |
+                    <a href="{% url 'request_hero_delete' request.id %}" class="text-red-600 hover:underline">Hapus</a>
+                </td>
+                {% endif %}
             </tr>
             {% endfor %}
         </tbody>

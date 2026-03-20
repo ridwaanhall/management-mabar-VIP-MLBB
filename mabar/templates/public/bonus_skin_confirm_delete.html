@@ -1,0 +1,17 @@
+{% extends 'public/base.html' %}
+
+{% block title %}Hapus Bonus Skin{% endblock %}
+
+{% block content %}
+<div class="max-w-xl mx-auto mt-8">
+    <h1 class="text-2xl font-bold mb-4">Konfirmasi Hapus Bonus Skin</h1>
+    <form method="post" class="bg-white p-6 rounded shadow">
+        {% csrf_token %}
+        <p>Apakah Anda yakin ingin menghapus bonus skin <b>{{ skin }}</b>?</p>
+        <div class="mt-4">
+            <button type="submit" class="bg-red-600 text-white px-4 py-2 rounded">Hapus</button>
+            <a href="{% url 'bonus_skin_list' %}" class="ml-4 text-gray-600">Batal</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

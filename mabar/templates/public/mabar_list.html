@@ -55,15 +55,19 @@
                 <td class="px-4 py-2">{{ prepare.catatan }}</td>
                 <td class="px-4 py-2 text-center">
                     {% if prepare.is_vvip %}
+                        <span class="inline-block px-2 py-1 rounded bg-blue-500 text-white text-xs font-semibold">VVIP</span>
                         <i class="ti ti-circle-check-filled text-blue-600"></i>
                     {% else %}
+                        <span class="inline-block px-2 py-1 rounded bg-gray-400 text-white text-xs font-semibold">Biasa</span>
                         <i class="ti ti-xbox-x-filled text-gray-400"></i>
                     {% endif %}
                 </td>
                 <td class="px-4 py-2 text-center">
                     {% if prepare.is_done %}
+                        <span class="inline-block px-2 py-1 rounded bg-green-500 text-white text-xs font-semibold">Selesai</span>
                         <i class="ti ti-circle-check-filled text-green-600"></i>
                     {% else %}
+                        <span class="inline-block px-2 py-1 rounded bg-red-500 text-white text-xs font-semibold">Belum</span>
                         <i class="ti ti-xbox-x-filled text-red-500"></i>
                     {% endif %}
                 </td>
@@ -123,15 +127,19 @@
                 <td class="px-4 py-2">{{ record.catatan }}</td>
                 <td class="px-4 py-2 text-center">
                     {% if record.is_vvip %}
+                        <span class="inline-block px-2 py-1 rounded bg-blue-500 text-white text-xs font-semibold">VVIP</span>
                         <i class="ti ti-circle-check-filled text-blue-600"></i>
                     {% else %}
+                        <span class="inline-block px-2 py-1 rounded bg-gray-400 text-white text-xs font-semibold">Biasa</span>
                         <i class="ti ti-xbox-x-filled text-gray-400"></i>
                     {% endif %}
                 </td>
                 <td class="px-4 py-2 text-center">
                     {% if record.is_done %}
+                        <span class="inline-block px-2 py-1 rounded bg-green-500 text-white text-xs font-semibold">Selesai</span>
                         <i class="ti ti-circle-check-filled text-green-600"></i>
                     {% else %}
+                        <span class="inline-block px-2 py-1 rounded bg-red-500 text-white text-xs font-semibold">Belum</span>
                         <i class="ti ti-xbox-x-filled text-red-500"></i>
                     {% endif %}
                 </td>
@@ -175,12 +183,15 @@
                 <td class="px-4 py-2">{{ done.catatan }}</td>
                 <td class="px-4 py-2 text-center">
                     {% if done.is_vvip %}
+                        <span class="inline-block px-2 py-1 rounded bg-blue-500 text-white text-xs font-semibold">VVIP</span>
                         <i class="ti ti-circle-check-filled text-blue-600"></i>
                     {% else %}
+                        <span class="inline-block px-2 py-1 rounded bg-gray-400 text-white text-xs font-semibold">Biasa</span>
                         <i class="ti ti-xbox-x-filled text-gray-400"></i>
                     {% endif %}
                 </td>
                 <td class="px-4 py-2 text-center">
+                    <span class="inline-block px-2 py-1 rounded bg-green-500 text-white text-xs font-semibold">Selesai</span>
                     <i class="ti ti-circle-check-filled text-green-600"></i>
                 </td>
             </tr>

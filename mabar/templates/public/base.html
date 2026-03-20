@@ -20,7 +20,7 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex items-center justify-between h-16">
             <div class="flex items-center">
-                <a class="text-xl font-bold" href="#">Website Mabar</a>
+                <a class="text-xl font-bold" href="{% url 'mabar_list' %}">Website Mabar</a>
                 <div class="ml-10 flex items-baseline space-x-4">
                     <a class="px-3 py-2 rounded-md text-sm font-medium {% if request.resolver_match.url_name == 'mabar_list' %}bg-gray-800{% endif %}" href="{% url 'mabar_list' %}">Daftar Mabar</a>
                     <a class="px-3 py-2 rounded-md text-sm font-medium {% if request.resolver_match.url_name == 'bonus_skin_list' %}bg-gray-800{% endif %}" href="{% url 'bonus_skin_list' %}">Daftar Bonus Skin</a>

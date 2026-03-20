@@ -66,21 +66,3 @@
     </table>
 </div>
 {% endblock %}
-                        <span class="badge bg-success">Bebas</span>
-                    {% endif %}
-                </td>
-                <td>{{ request.count }}</td>
-                <td>
-                    {% if request.is_done %}
-                        <i class="ti ti-circle-check-filled text-success"></i>
-                    {% else %}
-                        <i class="ti ti-xbox-x-filled text-danger"></i>
-                    {% endif %}
-                </td>
-                <td>{{ request.catatan }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-</div>
-{% endblock %}

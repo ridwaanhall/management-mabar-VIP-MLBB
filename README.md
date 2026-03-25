@@ -1,5 +1,7 @@
 # Management Mabar VIP MLBB
 
+![Mabar List](public/mabar-list.png)
+
 A Django web application for managing and tracking VIP Mabar (play together) sessions, bonus skin requests, and hero requests for Mobile Legends: Bang Bang (MLBB) streamers and their communities.
 
 ## Features
@@ -42,22 +44,17 @@ A Django web application for managing and tracking VIP Mabar (play together) ses
    pip install -r requirements.txt
    ```
 
-3. Apply migrations:
-
-   ```bash
-   python manage.py migrate
-   ```
-
-4. Create a superuser:
-
-   ```bash
-   python manage.py createsuperuser
-   ```
-
-5. Run the development server:
+3. Run the development server:
 
    ```bash
    python manage.py runserver
+   ```
+
+4. Login with
+
+   ```txt
+   username: admin
+   password: admin
    ```
 
 ### Usage
